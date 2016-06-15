@@ -47,7 +47,7 @@ Activities Infomation
                 <li><a href="#tab_7" data-toggle="tab"><strong>Payment</strong></a></li>
                 <li><a href="#tab_8" data-toggle="tab"><strong>Contact</strong></a></li>
                 <li><a href="#" ><i class="fa fa-trash-o text-danger"></i> DElETE </a></li>
-                <li><a href="#" ><i class="fa fa-search text-primary"></i> Preview </a></li>
+                <li><a href="{{ url("admin/activitiespreview/$activitiesdata->act_id") }}" ><i class="fa fa-search text-primary"></i> Preview </a></li>
 
               </ul>
               <div class="tab-content">
@@ -435,9 +435,7 @@ Activities Infomation
                       <div class="form-group">
                         <br>
                         <label for="">Shuttle</label>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ShuttleSchedule">
-                          <i class="fa fa-plus"></i>
-                        </button>
+                        <form class="" action="index.html" method="post">
                         <div class="row">
                           <br>
                           <div class="col-sm-3">
@@ -473,11 +471,20 @@ Activities Infomation
                         </div>
                       </div>
                     </div>
+                    <div class="col-sm-12">
+                      <button type="submit" class="btn btn-primary">
+                        Save
+                      </button>
+                    </div>
+                    </form>
                   </div>
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="">Shuttle Schedule</label>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ShuttleSchedule">
+                          <i class="fa fa-plus"></i>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -519,40 +526,168 @@ Activities Infomation
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="">Bank Name</label>
-                          <input type="text" class="form-control" name="bank_name" placeholder="">
+                          <input type="text" class="form-control" value="{{ $payment->bank_name }}" disabled="">
                         </div>
                         <div class="form-group">
                           <label for="">Bank Branch</label>
-                          <input type="text" class="form-control" name="bank_branch" placeholder="">
+                          <input type="text" class="form-control"  value="{{ $payment->bank_branch }}" disabled="">
                         </div>
                         <div class="form-group">
                           <label for="">Account Number</label>
-                          <input type="text" class="form-control" name="account_number" placeholder="">
+                          <input type="text" class="form-control"  value="{{ $payment->account_number }}" disabled="">
                         </div>
                         <div class="form-group">
                           <label for="">Account Name</label>
-                          <input type="text" class="form-control" name="account_name" placeholder="">
+                          <input type="text" class="form-control"  value="{{ $payment->account_name }}" disabled="">
                         </div>
                         <div class="form-group">
                           <label for="">Account Type</label>
-                          <input type="text" class="form-control" name="account_type" placeholder="">
+                          <input type="text" class="form-control"  value="{{ $payment->account_type }}" disabled="">
+                        </div>
+                        <div class="form-group">
+                          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#EPayment{{$payment->payment_id}}">
+                            <i class="fa fa-edit"></i>
+                          </button>
+
+                          <div class="modal fade" id="EPayment{{$payment->payment_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal-dialog" role="document">
+                            <form class="" action="{{ url('function/updatepayment') }}" method="post">
+                              <input type="hidden" name="id" value="{{$payment->payment_id}}">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Payment Details</h4>
+                              </div>
+                              <div class="modal-body">
+                                <div class="form-group">
+                                  <label for="">Bank Name</label>
+                                  <input type="text" class="form-control" name="bank_name" value="{{$payment->bank_name}}" >
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Bank Branch</label>
+                                  <input type="text" class="form-control" name="bank_branch" value="{{$payment->bank_branch}}" >
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Account Number</label>
+                                  <input type="text" class="form-control" name="account_number" value="{{$payment->account_number}}" >
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Account Name</label>
+                                  <input type="text" class="form-control" name="account_name" value="{{$payment->account_name}}" >
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Account Type</label>
+                                  <input type="text" class="form-control" name="account_type" value="{{$payment->account_type}}" >
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <a href="{{ url("function/deletepayment/$payment->payment_id") }}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                              </div>
+                            </div>
+                          </form>
+                          </div>
+                          </div>
                         </div>
                       </div>
+
+
                     @endforeach
                   </div>
                 </div><!-- /.tab-pane -->
                 <div class="tab-pane" id="tab_8">
                   <div class="row">
-                    <div class="col-sm-6">
-                      <div class="col-sm-6">
+                      <div class="col-sm-12">
                         <div class="form-group">
-                          <label for="">Contact Details </label> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Payment">
+                          <br>
+                          <label for="">Contact Details </label> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Contact">
                             <i class="fa fa-plus"></i>
                           </button>
                           <br>
+                          <div class="row">
+                          @foreach ($contactdata as $contact)
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label for="">Contact Name</label>
+                                  <input type="text" class="form-control" name="contact_name" value="{{$contact->contact_name}}" placeholder="" disabled="">
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Contact Nickname</label>
+                                  <input type="text" class="form-control" name="contact_nickname" value="{{$contact->contact_nickname}}" placeholder="" disabled="">
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Position</label>
+                                  <input type="text" class="form-control" name="contact_position" value="{{$contact->contact_position}}" placeholder="" disabled="">
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Contact phone</label>
+                                  <input type="text" class="form-control" name="contact_phone" value="{{$contact->contact_phone}}" placeholder="" disabled="">
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Contact Email</label>
+                                  <input type="text" class="form-control" name="contact_email" value="{{$contact->contact_email}}" placeholder="" disabled="">
+                                </div>
+                                <div class="form-group">
+                                  <label for="">Orther</label>
+                                  <input type="text" class="form-control" name="contact_orther" value="{{$contact->contact_orther}}" placeholder="" disabled="">
+                                </div>
+                                <div class="form-group">
+                                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#Contact{{$contact->contact_id}}">
+                                    <i class="fa fa-edit"></i>
+                                  </button>
+                                </div>
+                              </div>
+
+                              <div class="modal fade" id="Contact{{$contact->contact_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <form class="" action="{{ url('function/updatecontact') }}" method="post">
+                                  <input type="hidden" name="id" value="{{ $contact->contact_id }}">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Contact Details</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="form-group">
+                                      <label for="">Contact Name</label>
+                                      <input type="text" class="form-control" name="contact_name" value="{{$contact->contact_name}}" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="">Contact Nickname</label>
+                                      <input type="text" class="form-control" name="contact_nickname" value="{{$contact->contact_nickname}}" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="">Position</label>
+                                      <input type="text" class="form-control" name="contact_position" value="{{$contact->contact_position}}" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="">Contact phone</label>
+                                      <input type="text" class="form-control" name="contact_phone" value="{{$contact->contact_phone}}" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="">Contact Email</label>
+                                      <input type="text" class="form-control" name="contact_email" value="{{$contact->contact_email}}" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="">Orther</label>
+                                      <input type="text" class="form-control" name="contact_orther" value="{{$contact->contact_orther}}" placeholder="">
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <a href="{{ url("function/deletecontact/$contact->contact_id") }}">
+                                    <button type="button" class="btn btn-danger" >Delete</button></a>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                  </div>
+                                </div>
+                              </form>
+                              </div>
+                              </div>
+                          @endforeach
+                          </div>
                         </div>
                       </div>
-                    </div>
                   </div>
                 </div><!-- /.tab-pane -->
               </div><!-- /.tab-content -->
@@ -721,9 +856,53 @@ Activities Infomation
       <button type="submit" class="btn btn-primary">Save</button>
     </div>
   </div>
+</form>
 </div>
 </div>
 
+<div class="modal fade" id="Contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+  <form class="" action="{{ url('function/addcontact') }}" method="post">
+    <input type="hidden" name="activitiesid" value="{{ $activitiesdata->act_id }}">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title" id="myModalLabel">Contact Details</h4>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="">Contact Name</label>
+        <input type="text" class="form-control" name="contact_name" placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="">Contact Nickname</label>
+        <input type="text" class="form-control" name="contact_nickname" placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="">Position</label>
+        <input type="text" class="form-control" name="contact_position" placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="">Contact phone</label>
+        <input type="text" class="form-control" name="contact_phone" placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="">Contact Email</label>
+        <input type="text" class="form-control" name="contact_email" placeholder="">
+      </div>
+      <div class="form-group">
+        <label for="">Orther</label>
+        <input type="text" class="form-control" name="contact_orther" placeholder="">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>
 
 @endsection
 

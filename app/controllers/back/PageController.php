@@ -41,9 +41,22 @@
       'tricketadvancedata' => Activitiesticketadvance::where('activities_id','=',$actid)->get(),
       'timesessiondata' => Activitiestimesession::where('activities_id','=',$actid)->get(),
       'paymentdata' => Activitiespayment::where('activities_id','=',$actid)->get(),
+      'contactdata' => Activitiescontact::where('activities_id','=',$actid)->get(),
       'categorydata' => Activitiescategory::all(),
       );
       return View::make('back.activities_infomation',$data);
+    }
+    public function getActivitiespreview($actid)
+    {
+      $data = array('activitiesdata' => Activities::where('act_id','=',$actid)->first(),
+      'pricedata' => Price::where('activities_id','=',$actid)->get(),
+      'tricketadvancedata' => Activitiesticketadvance::where('activities_id','=',$actid)->get(),
+      'timesessiondata' => Activitiestimesession::where('activities_id','=',$actid)->get(),
+      'paymentdata' => Activitiespayment::where('activities_id','=',$actid)->get(),
+      'contactdata' => Activitiescontact::where('activities_id','=',$actid)->get(),
+      'categorydata' => Activitiescategory::all(),
+      );
+      return View::make('back.activities_preview',$data);
     }
     public function getActivitiescategory()
     {

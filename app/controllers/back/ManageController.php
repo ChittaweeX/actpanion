@@ -256,6 +256,7 @@
   }
 /// END Price /////////////
 
+/// Payment ///////////////
   public function postAddpayment()
   {
     $inputs = Input::all();
@@ -274,8 +275,79 @@
     }
   }
 
+  public function postUpdatepayment()
+  {
+    $inputs = Input::all();
+    $id = $inputs['id'];
+    if (!empty($inputs['bank_name'])) {
+      $payment1 = Activitiespayment::where('payment_id','=',$id)->first();
+      $payment1->bank_name = $inputs['bank_name'];
+      $payment1->bank_branch = $inputs['bank_branch'];
+      $payment1->account_number = $inputs['account_number'];
+      $payment1->account_name = $inputs['account_name'];
+      $payment1->account_type = $inputs['account_type'];
+      $payment1->save();
+      $activitiesid = $payment1->activities_id ;
+      return Redirect::to("admin/activitiesinfo/$activitiesid");
+    }
+  }
 
+  public function getDeletepayment($id)
+  {
+      $payment1 = Activitiespayment::where('payment_id','=',$id)->first();
+      $payment1->delete();
+      $activitiesid = $payment1->activities_id ;
+      return Redirect::to("admin/activitiesinfo/$activitiesid");
 
+  }
+
+/// END Payment ///////////////
+/// Contact //////////////
+public function postAddcontact()
+{
+  $inputs = Input::all();
+  $actid = $inputs['activitiesid'];
+  if (!empty($inputs['contact_name'])) {
+    $contact = new Activitiescontact();
+    $contact->activities_id = $actid;
+    $contact->contact_name = $inputs['contact_name'];
+    $contact->contact_nickname = $inputs['contact_nickname'];
+    $contact->contact_position = $inputs['contact_position'];
+    $contact->contact_phone = $inputs['contact_phone'];
+    $contact->contact_email = $inputs['contact_email'];
+    $contact->contact_orther = $inputs['contact_orther'];
+    $contact->save();
+    $activitiesid = $contact->activities_id ;
+    return Redirect::to("admin/activitiesinfo/$activitiesid");
+  }
+}
+public function postUpdatecontact()
+{
+  $inputs = Input::all();
+  $id = $inputs['id'];
+  if (!empty($inputs['contact_name'])) {
+    $contact = Activitiescontact::where('contact_id','=',$id)->first();
+    $contact->contact_name = $inputs['contact_name'];
+    $contact->contact_nickname = $inputs['contact_nickname'];
+    $contact->contact_position = $inputs['contact_position'];
+    $contact->contact_phone = $inputs['contact_phone'];
+    $contact->contact_email = $inputs['contact_email'];
+    $contact->contact_orther = $inputs['contact_orther'];
+    $contact->save();
+    $activitiesid = $contact->activities_id ;
+    return Redirect::to("admin/activitiesinfo/$activitiesid");
+  }
+}
+
+public function getDeletecontact($id)
+{
+    $contact = Activitiescontact::where('contact_id','=',$id)->first();
+    $contact->delete();
+    $activitiesid = $contact->activities_id ;
+    return Redirect::to("admin/activitiesinfo/$activitiesid");
+  
+}
+/// END Contact //////////////
   }
 
  ?>
