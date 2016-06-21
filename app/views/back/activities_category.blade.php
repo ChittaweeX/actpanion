@@ -1,7 +1,7 @@
 @extends('backtemplate.main')
 <!--Header Title -->
 @section('title')
-Activities Group
+Activities
 @endsection
 
 <!--Plugins CSS -->
@@ -17,43 +17,117 @@ Activities Group
 
 <!--Page title-->
 @section('pagetitle')
-Activities Category
+Activities
 @endsection
 
 <!--Top navigation-->
 @section('navigation')
-  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="#">Examples</a></li>
-  <li class="active">Blank page</li>
+  <li><a href="#"><i class="fa fa-picture-o"></i> Activities</a></li>
+  <li class="active"><a href="#">Category</a></li>
 @endsection
 
 <!--Main Content -->
 @section('content')
   <!-- Default box -->
-  <div class="box">
-    <div class="box-header with-border">
-      <a href="{{ url('admin/activitiesaddcategory') }}"><button type='submit' class='btn btn-sm btn-primary btn-flat'>Add Activities Category </button></a>
-    </div>
-    <div class="box-body ">
+  <div class="box box-primary ">
+    <div class="box-header with-border pull-right">
+      <button type='submit' class='btn btn-lg  btn-primary btn-flat' data-toggle="modal" data-target="#addCat"><i class="fa fa-plus"></i> Add Category </button>
+      <div class="modal fade" id="addCat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <form  action="{{ url('function/addcategory') }}" method="post" enctype="multipart/form-data">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add New Category</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Category Name (ENG)</label>
+          <div class="row">
+            <div class="col-sm-12 ">
+              <input type="text" class="form-control" name="CatnameEng" placeholder="" required="">
+            </div>
+          </div>
+        </div>
 
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+    </div>
+    <div class="box-body">
+      <strong>Manage Category</strong>
+      <hr>
       <div class='table-responsive'>
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example1" class="table table-bordered ">
           <thead>
-            <tr>
-              <th>ID</th>
-              <th>Category Name</th>
-              <th>Action</th>
+            <tr >
+              <th class="text-primary">ID</th>
+              <th class="text-primary">Name</th>
+              <th class="text-primary">Activities in</th>
+              <th class="text-primary">Created</th>
+              <th class="text-primary">Create By</th>
+              <th class="text-primary">Action</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($groupdata as $data )
+            @foreach($category as $cat)
               <tr>
-                <td>{{ $data->category_id }}</td>
-                <td>{{ $data->category_name }}</td>
-                <td><button type="button" class="btn btn-primary btn-flat"><i class="fa fa-edit"></i></button>
-                <button type="button" class="btn btn-danger btn-flat"><i class="fa fa-trash-o"></i></button></td>
-              </tr>
+                <td>{{ $cat->category_id }}</td>
+                <td>{{$cat->category_name}}</td>
+                <td>0</td>
+                <td>{{ $cat->created_at }}</td>
+                <td>Manager</td>
+                <td>
+
+                  <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="modal" data-target="#editCat-{{$cat->category_id}}"><i class="fa fa-edit"></i></button>
+                  <a href="">
+                  <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="tooltip" data-placement="top" title="View On Page"><i class="fa fa-globe"></i></button></a>
+                </tr>
+
+                <div class="modal fade" id="editCat-{{$cat->category_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <form  action="{{ url('function/updatecategory') }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="categoryId" value="{{$cat->category_id}}">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="">Category Name (ENG)</label>
+                    <div class="row">
+                      <div class="col-sm-12 ">
+                        <input type="text" class="form-control" name="CatnameEng" value="{{$cat->category_name}}" required="">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <a href="{{ url("function/deletecategory/$cat->category_id")}}">
+                    <button type="button" class="btn btn-danger" >Delete</button>
+                  </a>
+
+                </div>
+              </div>
+            </form>
+            </div>
+          </div>
             @endforeach
+
 
 
 
@@ -98,20 +172,6 @@ Activities Category
 
 <!--Control alert box -->
 @section('alertcontrol')
-  @if(Session::has('loginerror'))
-    <script>
-      $(document).ready(function() {
 
-          $(window).load(function(){
-                     swal({
-             title: "Login Error!",
-             text: "Username หรือ Password ของคุณไม่ถูกต้อง กรุณาลองอีกครั้ง",
-             type: "warning",
-             confirmButtonText: "Try again!"
-         });
-                   });
 
-        });
-    </script>
-  @endif
 @endsection

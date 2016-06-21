@@ -71,7 +71,7 @@ Activities Infomation
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="">Area</label>
-                        <textarea name="area" class="form-control" rows="8" cols="40">{{ $activitiesdata->act_area }}</textarea>
+                        <textarea name="area" class="textarea" rows="20" style="width: 100%;">{{ $activitiesdata->act_area }}</textarea>
                       </div>
                       <div class="form-group">
                         <label for="">Map</label>
@@ -143,11 +143,11 @@ Activities Infomation
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="">Getting here</label>
-                        <textarea name="getting" rows="8" cols="40" class="form-control">{{ $activitiesdata->act_getting }}</textarea>
+                        <textarea name="getting" class="textarea" rows="20" style="width: 100%;">{{ $activitiesdata->act_getting }}</textarea>
                       </div>
                       <div class="form-group">
                         <label for="">About</label>
-                        <textarea name="about" rows="10" cols="40" class="form-control">{{ $activitiesdata->act_about }}</textarea>
+                        <textarea name="about" class="textarea" rows="20" style="width: 100%;">{{ $activitiesdata->act_about }}</textarea>
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -925,20 +925,5 @@ Activities Infomation
 
 <!--Control alert box -->
 @section('alertcontrol')
-  @if(Session::has('loginerror'))
-    <script>
-      $(document).ready(function() {
 
-          $(window).load(function(){
-                     swal({
-             title: "Login Error!",
-             text: "Username หรือ Password ของคุณไม่ถูกต้อง กรุณาลองอีกครั้ง",
-             type: "warning",
-             confirmButtonText: "Try again!"
-         });
-                   });
-
-        });
-    </script>
-  @endif
 @endsection

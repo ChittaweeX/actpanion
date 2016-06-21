@@ -26,14 +26,12 @@
     /* Activities */
     public function getActivities()
     {
-      $data = array('activitiesdata' => Activities::all() , );
+      $data = array('activitiesdata' => Activities::join('activitiescategory', 'activities.category_id', '=', 'activitiescategory.category_id')
+      ->get() ,
+    'categorydata' => Activitiescategory::all() );
       return View::make('back.activities',$data);
     }
-    public function getActivitiesadd()
-    {
-      $data = array('categorydata' => Activitiescategory::all() , );
-      return View::make('back.activities_addnew',$data);
-    }
+
     public function getActivitiesinfo($actid)
     {
       $data = array('activitiesdata' => Activities::where('act_id','=',$actid)->first(),
@@ -58,15 +56,13 @@
       );
       return View::make('back.activities_preview',$data);
     }
+    // Category
     public function getActivitiescategory()
     {
-      $data = array('groupdata' => Activitiescategory::all() , );
+      $data = array('category' => Activitiescategory::all() , );
       return View::make('back.activities_category',$data);
     }
-    public function getActivitiesaddcategory()
-    {
-      return View::make('back.activities_category_addnew');
-    }
+
     /* END Activities */
 
 

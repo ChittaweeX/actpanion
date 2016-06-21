@@ -43,12 +43,45 @@ Preview
           <strong>Infomation Details</strong>
           <br>
           <br>
-          Activitie Name : {{$activitiesdata->act_nameEng}}
+           <strong>Name</strong> : {{$activitiesdata->act_nameEng}}
           <br>
-          Activitie NameThai : {{$activitiesdata->act_nameThai}}
+           <strong>NameThai</strong> : {{$activitiesdata->act_nameThai}}
+          <br>
+           <strong>Area</strong> : {{$activitiesdata->act_area}}
+          <br>
+           <strong>Open Day</strong> : {{$activitiesdata->act_openday1 == 1 ? 'Sunday' : ''}} {{$activitiesdata->act_openday2 == 1 ? 'Monday' : ''}}
+           <br>
+            <strong>Time Open</strong> : {{$activitiesdata->act_opentime}} - {{$activitiesdata->act_closetime}}
+            <br>
+            <hr>
+             <strong>Getting</strong> :
+             <br>
+            {{$activitiesdata->act_getting	}}
+            <br>
+             <strong>Map</strong> :
+             <br>
+             <iframe width="500" height="400" frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB_fAX67ruUpYLI5P4QRGvQrD9LvEem-Hc
+    &q={{$activitiesdata->act_map}}" allowfullscreen>
+</iframe>
+             <br>
+             <strong>About</strong> : <br>{{$activitiesdata->act_about	}}
+
+             <hr>
+             <strong>Timesession</strong>
+             @foreach ($timesessiondata as $time)
+               <br>
+                <strong>Time Open</strong> : {{$time->timesesion_open}} - {{$time->timesesion_close}}
+             @endforeach
+             <hr>
+             <strong>Ticketadvance</strong>
+             @foreach ($timesessiondata as $time)
+               <br>
+                <strong>Time Open</strong> : {{$time->timesesion_open}} - {{$time->timesesion_close}}
+             @endforeach
         </div>
         <div class="col-sm-6">
-          <img src="http://placehold.it/350x150" alt="" class="img-responsive"/>
+          <img src="http://placehold.it/400x400" alt="" class="img-responsive"/>
         </div>
       </div>
     </div><!-- /.box-body -->

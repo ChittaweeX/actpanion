@@ -20,6 +20,10 @@
     <!-- Sweet Alert -->
     <link href="{{ url('assets/backend/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
 
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="{{ url('assets/backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
+
 
     @yield('cssextent')
     @yield('csscustom')
@@ -85,8 +89,80 @@
     <script src="{{ url('assets/backend/dist/js/app.min.js') }}"></script>
     <!-- Sweet alert -->
     <script src="{{ url('assets/backend/plugins/sweetalert/sweetalert.min.js') }}"></script>
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="{{ url('assets/backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    <script>
+      $(function () {
+        //bootstrap WYSIHTML5 - text editor
+        $(".textarea").wysihtml5();
+      });
+    </script>
     @yield('jsextent')
     @yield('jscustom')
     @yield('alertcontrol')
+    @if(Session::has('added'))
+      <script>
+        $(document).ready(function() {
+
+            $(window).load(function(){
+                       swal({
+               title: "Complete!",
+               text: "ทำการสร้างข้อมูลเรียบร้อยแล้ว",
+               type: "success",
+               confirmButtonText: "OK"
+           });
+                     });
+
+          });
+      </script>
+    @endif
+    @if(Session::has('updated'))
+      <script>
+        $(document).ready(function() {
+
+            $(window).load(function(){
+                       swal({
+               title: "Saved!",
+               text: "ทำการบันทึกข้อมูลเรียบร้อยแล้ว",
+               type: "success",
+               confirmButtonText: "OK"
+           });
+                     });
+
+          });
+      </script>
+    @endif
+    @if(Session::has('deleted'))
+      <script>
+        $(document).ready(function() {
+
+            $(window).load(function(){
+                       swal({
+               title: "Deleted!",
+               text: "ทำการลบข้อมูลเรียบร้อยแล้ว",
+               type: "success",
+               confirmButtonText: "OK"
+           });
+                     });
+
+          });
+      </script>
+    @endif
+    @if(Session::has('error01'))
+      <script>
+        $(document).ready(function() {
+
+            $(window).load(function(){
+                       swal({
+               title: "Fail!",
+               text: "เกิดข้อผิดพลาด",
+               type: "warning",
+               confirmButtonText: "OKs"
+           });
+                     });
+
+          });
+      </script>
+    @endif
   </body>
 </html>

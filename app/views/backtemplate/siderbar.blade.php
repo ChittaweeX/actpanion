@@ -20,10 +20,18 @@
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
       </li>
-      <li {{ Request::segment('2')=='activities'?'class="active"':'' }}>
-        <a href="{{ url('admin/activities') }}">
-          <i class="fa fa-th"></i> <span>Activities</span>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-picture-o"></i><span>Activities</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
+        <ul class="treeview-menu">
+          <li {{ Request::segment('2')=='activities'?'class="active"':'' }}>
+            <a href="{{ url('admin/activities') }}">
+              <i class="fa fa fa-picture-o"></i> <span>Activities</span>
+            </a>
+          </li>
+          <li><a href="{{ url('admin/activitiescategory') }}"><i class="fa fa-sitemap"></i>Category</a></li>
+        </ul>
       </li>
       <li {{ Request::segment('2')=='adminuser'?'class="active"':'' }}>
         <a href="{{ url('admin/adminuser') }}">

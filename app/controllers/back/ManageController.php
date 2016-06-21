@@ -24,16 +24,42 @@
 
   }
 
-
-
-  public function postAddcategoryactivities()
+  public function postAddcategory()
   {
     $inputs = Input::all();
-    $category = new Activitiescategory();
-    $category->category_name = $inputs['categoryname'];
-    $category->save();
-    return Redirect::to('admin/activitiescategory');
+    if (!empty($inputs['CatnameEng'])) {
+      $category = new Activitiescategory();
+      $category->category_name = $inputs['CatnameEng'];
+      $category->save();
+      return Redirect::to('admin/activitiescategory')->with('added', 'value');
+    }else {
+      return Redirect::to('admin/activitiescategory')->with('error01', 'value');
+    }
+
   }
+
+  public function postUpdatecategory()
+  {
+    $inputs = Input::all();
+    $id = $inputs['categoryId'];
+    if (!empty($inputs['CatnameEng'])) {
+      $category = Activitiescategory::where('category_id','=',$id)->first();
+      $category->category_name = $inputs['CatnameEng'];
+      $category->save();
+      return Redirect::to('admin/activitiescategory')->with('updated', 'value');
+    }else {
+      return Redirect::to('admin/activitiescategory')->with('error01', 'value');
+    }
+
+  }
+
+  public function getDeletecategory($id)
+  {
+    $category = Activitiescategory::where('category_id','=',$id)->first();
+    $category->delete();
+    return Redirect::to('admin/activitiescategory')->with('deleted', 'value');
+  }
+
 
   public function postAddactivities()
   {
@@ -53,9 +79,9 @@
       $activities->save();
       $activitiesid = $activities->act_id;
 
-      return Redirect::to("admin/activitiesinfo/$activitiesid");
+      return Redirect::to("admin/activitiesinfo/$activitiesid")->with('added', 'value');
     }else {
-      return Redirect::to('admin/activitiesadd');
+      return Redirect::to('admin/activitiesadd')->with('error01', 'value');
     }
 
 
@@ -119,7 +145,7 @@
       $activities->category_id = $inputs['category'];
       $activities->save();
       $activitiesid = $activities->act_id;
-      return Redirect::to("admin/activitiesinfo/$activitiesid");
+      return Redirect::to("admin/activitiesinfo/$activitiesid")->with('updated', 'value');
     }
   }
 
@@ -345,7 +371,7 @@ public function getDeletecontact($id)
     $contact->delete();
     $activitiesid = $contact->activities_id ;
     return Redirect::to("admin/activitiesinfo/$activitiesid");
-  
+
 }
 /// END Contact //////////////
   }

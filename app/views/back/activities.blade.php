@@ -22,9 +22,8 @@ Activites
 
 <!--Top navigation-->
 @section('navigation')
-  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="#">Examples</a></li>
-  <li class="active">Blank page</li>
+  <li><a href="#"><i class="fa fa-picture-o"></i> Activities</a></li>
+  <li class="active"><a href="#">Manage Activities</a></li>
 @endsection
 
 <!--Main Content -->
@@ -32,19 +31,74 @@ Activites
   <!-- Default box -->
   <div class="box box-primary ">
     <div class="box-header with-border pull-right">
-      <a href="{{ url('admin/activitiesadd') }}"><button type='submit' class='btn btn-sm  btn-primary btn-flat'><i class="fa fa-plus"></i> Add Activities </button></a>
-      <a href="{{ url('admin/activitiescategory') }}"><button type='submit' class='btn btn-sm btn-info btn-flat'>Activities Category </button></a>
+      <button type='submit' class='btn btn-lg  btn-primary btn-flat' data-toggle="modal" data-target="#addAct"><i class="fa fa-plus"></i> Add Activities </button>
+      <div class="modal fade" id="addAct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <form  action="{{ url('function/addactivities') }}" method="post" enctype="multipart/form-data">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add New Activities</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+        <div class="form-group">
+          <label for="">Activities Name (ENG)</label>
+          <div class="row">
+            <div class="col-sm-12 ">
+              <input type="text" class="form-control" name="nameEng" placeholder="" required="">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Activities Name (Thai)</label>
+          <div class="row">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" name="nameThai" placeholder="" required="">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Category</label>
+          <div class="row">
+            <div class="col-sm-12">
+              <select class="form-control" name="categoryid">
+                @foreach ($categorydata as $cat)
+                  <option value="{{ $cat->category_id }}">
+                    {{ $cat->category_name }}
+                  </option>
+                @endforeach
+
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
     </div>
     <div class="box-body">
-      <strong>Activites Table</strong>
+      <strong>Manage Activites</strong>
       <hr>
       <div class='table-responsive'>
-        <table id="example1" class="table table-bordered table-striped">
+        <table id="example1" class="table table-bordered ">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Action</th>
+              <th class="text-primary">ID</th>
+              <th class="text-primary">Name</th>
+              <th class="text-primary">Name Thai</th>
+              <th class="text-primary">Category</th>
+              <th class="text-primary">Status</th>
+              <th class="text-primary">Created</th>
+              <th class="text-primary">Create By</th>
+              <th class="text-primary">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -52,12 +106,17 @@ Activites
               <tr>
                 <td>{{ $data->act_id }}</td>
                 <td>{{ $data->act_nameEng }}</td>
+                <td>{{ $data->act_nameThai }}</td>
+                <td>{{ $data->category_name }}</td>
+                <td><span class="label label-success">Active</span></td>
+                <td>{{ $data->created_at }}</td>
+                <td>Manager</td>
                 <td>
                   <a href="{{ url("admin/activitiesinfo/$data->act_id") }}">
-                  <button type="button" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button></a>
-
-                <button type="button" class="btn btn-danger btn-flat"><i class="fa fa-trash-o"></i></button></td>
-              </tr>
+                  <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="tooltip" data-placement="top" title="Manage This Activitie"><i class="fa fa-edit"></i></button></a>
+                  <a href="">
+                  <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="tooltip" data-placement="top" title="View On Page"><i class="fa fa-globe"></i></button></a>
+                </tr>
             @endforeach
 
 
