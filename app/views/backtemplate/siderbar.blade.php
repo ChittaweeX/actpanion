@@ -38,6 +38,11 @@
           <i class="fa fa-user"></i> <span>Admin user</span>
         </a>
       </li>
+      <li {{ Request::segment('2')=='member'?'class="active"':'' }}>
+        <a href="{{ url('admin/member') }}">
+          <i class="fa fa-user"></i> <span>Member</span>
+        </a>
+      </li>
       <li class="header">PAGE MANAGEMENT</li>
       <li {{ Request::segment('2')=='x'?'class="active"':'' }}>
         <a href="{{ url('admin/user') }}">

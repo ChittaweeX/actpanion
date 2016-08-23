@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => 'www.actpanion.com',
 			'database'  => 'actpanion_data',
-			'username'  => 'root',
-			'password'  => 'root',
+			'username'  => 'actmaster',
+			'password'  => 'masterkey',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

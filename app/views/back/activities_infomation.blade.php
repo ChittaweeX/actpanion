@@ -46,14 +46,14 @@ Activities Infomation
                 <li><a href="#tab_6" data-toggle="tab"><strong>Image</strong></a></li>
                 <li><a href="#tab_7" data-toggle="tab"><strong>Payment</strong></a></li>
                 <li><a href="#tab_8" data-toggle="tab"><strong>Contact</strong></a></li>
-                <li><a href="#" ><i class="fa fa-trash-o text-danger"></i> DElETE </a></li>
+                <li><a href="{{ url("function/deleteact/$activitiesdata->act_id") }}" ><i class="fa fa-trash-o text-danger"></i> DElETE </a></li>
                 <li><a href="{{ url("admin/activitiespreview/$activitiesdata->act_id") }}" ><i class="fa fa-search text-primary"></i> Preview </a></li>
 
               </ul>
               <div class="tab-content">
 
                 <div class="tab-pane active" id="tab_1">
-                  <form class="" action="{{ url('function/addinfomationactivities') }}" method="post">
+                  <form class="" action="{{ url('function/addinfomationactivities') }}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="actid" value="{{ $activitiesdata->act_id }}">
                   <div class="row">
                     <div class="col-sm-6">
@@ -138,6 +138,14 @@ Activities Infomation
                             Everyday
                           </label>
                         </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Province</label>
+                        <input type="text" class="form-control" name="province" placeholder="" value="{{ $activitiesdata->act_province }}">
+                      </div>
+                      <div class="form-group">
+                        <label for="">Cover Image</label>
+                        <input type="file" class="form-control" name="coverimage" placeholder="">
                       </div>
                     </div>
                     <div class="col-sm-6">
@@ -363,6 +371,9 @@ Activities Infomation
                               <input type="text" class="form-control"  value="{{ $price->price_money }}" disabled="">
                             </div>
                             <div class="col-sm-1">
+                              <input type="text" class="form-control"  value="{{ $price->price_pack }}" disabled="">
+                            </div>
+                            <div class="col-sm-1">
                               <a href="#" data-toggle="modal" data-target="#Price{{$price->price_id}}" >
                                 <button type="button" class="btn btn-warning">
                                   <i class="fa fa-edit"></i>
@@ -432,52 +443,10 @@ Activities Infomation
                 <div class="tab-pane" id="tab_5">
                   <div class="row">
                     <div class="col-sm-6">
-                      <div class="form-group">
-                        <br>
-                        <label for="">Shuttle</label>
-                        <form class="" action="index.html" method="post">
-                        <div class="row">
-                          <br>
-                          <div class="col-sm-3">
-                            <input type="text" class="form-control" name="shuttle_price"  value="{{ $activitiesdata->act_shuttle_price }}" placeholder="Price">
-                          </div>
-                          <div class="col-sm-3">
-                            <input type="text" class="form-control" name="shuttle_currency" value="{{ $activitiesdata->act_shuttle_currency }}" placeholder="Currency">
-                          </div>
-                          <div class="col-sm-3">
-                            <input type="number" class="form-control" name="shuttle_person" value="{{ $activitiesdata->act_shuttle_person }}" placeholder="Person">
-                          </div>
-                        </div>
-                      </div>
+
                     </div>
-                    <div class="col-sm-6">
-                      <br>
-                      <div class="form-group">
-                        <label for="">Shuttle Advance booking</label>
-                        <div class="row">
-                          <br>
-                          <div class="col-sm-3">
-                            <input type="number" class="form-control" name="shuttle_advance_person"  value="{{ $activitiesdata->act_shuttle_advance_person }}" placeholder="">
-                          </div>
-                          <div class="col-sm-3">
-                            <input type="text" class="form-control"  value="" placeholder="Day" disabled="">
-                          </div>
-                          <div class="col-sm-3">
-                            <input type="text" class="form-control"  value="" placeholder="Before" disabled="">
-                          </div>
-                          <div class="col-sm-3">
-                            <input type="time" class="form-control"  name="shuttle_advance_time"  value="{{ $activitiesdata->act_shuttle_advance_time }}" placeholder="">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12">
-                      <button type="submit" class="btn btn-primary">
-                        Save
-                      </button>
-                    </div>
-                    </form>
                   </div>
+                  <hr>
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -495,13 +464,19 @@ Activities Infomation
                       <div class="form-group">
                         <label for="">Image</label>
                         <div class="row">
-                          @for ($i = 0; $i < 6; $i++)
-                            <div class="col-sm-4">
-                              <br>
-                              <img src="http://placehold.it/350x150" alt="" class="img-thumbnail" />
+                          <form class="form-inline" action="{{ url('function/image') }}" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="actid" value="{{$activitiesdata->act_id}}">
+                            <div class="col-sm-12">
+                              <input type="file" multiple="multiple" name="images[]" class="form-control"/>
+                              <button type='submit' class='btn btn-sm btn-primary '>Upload</button>
                             </div>
-
-                          @endfor
+                          </form>
+                          @foreach ($imagedata as $image)
+                            <div class="col-sm-2">
+                              <br>
+                              <img src="{{ url("image/product/$image->img_url") }}" alt="" class="img-thumbnail" />
+                            </div>
+                          @endforeach
                         </div>
                       </div>
                     </div>
@@ -753,10 +728,30 @@ Activities Infomation
           <input type="number" class="form-control" name="Ticketadvanceday"  >
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control"  name="Ticketadvancetype1"  value="" placeholder="" >
+          <select class="form-control" name="Ticketadvancetype1">
+            <option value="Hr">
+              HR
+            </option>
+            <option value="Day">
+              Day
+            </option>
+            <option value="Month">
+              Month
+            </option>
+            <option value="Year">
+              Year
+            </option>
+          </select>
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control"  name="Ticketadvancetype2" value="" placeholder="" >
+          <select class="form-control" name="Ticketadvancetype2">
+            <option value="before">
+              before
+            </option>
+            <option value="after">
+              after
+            </option>
+          </select>
         </div>
         <div class="col-sm-3">
           <div class="input-group clockpicker" data-autoclose="true">
@@ -788,17 +783,33 @@ Activities Infomation
     </div>
     <div class="modal-body">
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <input type="number" class="form-control" name="price_person" value="" placeholder="">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" name="price_type" value="" placeholder="Type" >
+          <select class="form-control" name="price_type">
+            <option value="Adult">
+              Adult
+            </option>
+            <option value="Child">
+              Child
+            </option>
+            <option value="Senior">
+              Senior
+            </option>
+            <option value="Infant">
+              Infant
+            </option>
+          </select>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <input type="text" class="form-control" name="price_totall" value="" placeholder="" >
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <input type="text" class="form-control" name="price_money" value="THB" placeholder="">
+        </div>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="price_pack" value="" placeholder="">
         </div>
       </div>
       <div class="row">

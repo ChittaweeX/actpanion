@@ -40,6 +40,7 @@
       'timesessiondata' => Activitiestimesession::where('activities_id','=',$actid)->get(),
       'paymentdata' => Activitiespayment::where('activities_id','=',$actid)->get(),
       'contactdata' => Activitiescontact::where('activities_id','=',$actid)->get(),
+      'imagedata' => Activitiesimage::where('act_id','=',$actid)->get(),
       'categorydata' => Activitiescategory::all(),
       );
       return View::make('back.activities_infomation',$data);
@@ -63,8 +64,11 @@
       return View::make('back.activities_category',$data);
     }
 
-    /* END Activities */
-
+    public function getMember()
+    {
+      $data = array('members' => Member::all() , );
+      return View::make('back.member',$data);
+    }
 
   }
 

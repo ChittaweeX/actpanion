@@ -39,49 +39,106 @@ Preview
     </div>
     <div class="box-body">
       <div class="row">
-        <div class="col-sm-6">
-          <strong>Infomation Details</strong>
+        <div class="col-sm-8">
+          <strong><h2>Infomation Details</h2></strong>
           <br>
           <br>
-           <strong>Name</strong> : {{$activitiesdata->act_nameEng}}
-          <br>
-           <strong>NameThai</strong> : {{$activitiesdata->act_nameThai}}
-          <br>
-           <strong>Area</strong> : {{$activitiesdata->act_area}}
-          <br>
-           <strong>Open Day</strong> : {{$activitiesdata->act_openday1 == 1 ? 'Sunday' : ''}} {{$activitiesdata->act_openday2 == 1 ? 'Monday' : ''}}
-           <br>
-            <strong>Time Open</strong> : {{$activitiesdata->act_opentime}} - {{$activitiesdata->act_closetime}}
-            <br>
-            <hr>
-             <strong>Getting</strong> :
+           <strong><h3 class="text-primary">Name</h3></strong>  {{$activitiesdata->act_nameEng}}
+          <hr>
+           <strong><h3 class="text-primary">NameThai</h3></strong>  {{$activitiesdata->act_nameThai}}
+          <hr>
+           <strong><h3 class="text-primary">Area</h3></strong> {{$activitiesdata->act_area}}
+          <hr>
+           <strong><h3 class="text-primary">Open Day</h3></strong>  {{$activitiesdata->act_openday1 == 1 ? 'Sunday' : ''}} {{$activitiesdata->act_openday2 == 1 ? 'Monday' : ''}}
+          <hr>
+          <strong><h3 class="text-primary">Time Open</h3></strong>  {{$activitiesdata->act_opentime}} - {{$activitiesdata->act_closetime}}
+          <hr>
+             <strong><h3 class="text-primary">Getting</h3></strong>
              <br>
             {{$activitiesdata->act_getting	}}
             <br>
-             <strong>Map</strong> :
+             <strong><h3 class="text-primary">Map</h3></strong>
              <br>
              <iframe width="500" height="400" frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB_fAX67ruUpYLI5P4QRGvQrD9LvEem-Hc
     &q={{$activitiesdata->act_map}}" allowfullscreen>
 </iframe>
              <br>
-             <strong>About</strong> : <br>{{$activitiesdata->act_about	}}
+             <strong><h3 class="text-primary">About</h3></strong>{{$activitiesdata->act_about	}}
+             <hr>
+             <strong><h3 class="text-primary">TimeSession</h3></strong>
+             @foreach ($timesessiondata as $time)
+               <br>
+                <strong>Time Open</strong> : {{$time->timesesion_open}} - {{$time->timesesion_close}}
+             @endforeach
+             <hr>
+             <strong><h3 class="text-primary">TicketAdvanceBooking</h3></strong>
+             @foreach ($tricketadvancedata as $tkv)
+               <br>
+                {{ $tkv->ticket_day }} {{ $tkv->ticket_type1 }} {{ $tkv->ticket_type2 }} {{ $tkv->ticket_time }}
+             @endforeach
+            <hr>
+            <strong><h3 class="text-primary">Price</h3></strong>
+            @foreach ($pricedata as $price)
+              <br>
+               {{ $price->price_person }} {{ $price->price_type }} {{ $price->price_totall }} {{ $price->price_money }}
+               <br>
+               {{ $price->price_define }}
+            @endforeach
+           <hr>
+           <strong><h3 class="text-primary">Payment</h3></strong>
+           @foreach ($paymentdata as $payment)
+             <br>
+              Bank Name {{ $payment->bank_name }}
+              <br>
+              Bank Branch {{ $payment->bank_branch }}
+              <br>
+              Account Number {{ $payment->account_number }}
+              <br>
+              Account Name {{ $payment->account_name }}
+              <br>
+              Account Type {{ $payment->account_type }}
+              <hr>
+           @endforeach
 
+          <strong><h3 class="text-primary">Contact</h3></strong>
+          @foreach ($contactdata as $contact)
+            <br>
+             Contact Name {{ $contact->contact_name }}
+             <br>
+             Contact Nickname {{ $contact->contact_nickname }}
+             <br>
+             Position {{ $contact->contact_position }}
+             <br>
+             Contact phone {{ $contact->contact_phone }}
+             <br>
+             Contact Email {{ $contact->contact_email }}
+             <br>
+             Orther {{ $contact->contact_email }}
              <hr>
-             <strong>Timesession</strong>
-             @foreach ($timesessiondata as $time)
-               <br>
-                <strong>Time Open</strong> : {{$time->timesesion_open}} - {{$time->timesesion_close}}
-             @endforeach
-             <hr>
-             <strong>Ticketadvance</strong>
-             @foreach ($timesessiondata as $time)
-               <br>
-                <strong>Time Open</strong> : {{$time->timesesion_open}} - {{$time->timesesion_close}}
-             @endforeach
+          @endforeach
+
+
         </div>
-        <div class="col-sm-6">
-          <img src="http://placehold.it/400x400" alt="" class="img-responsive"/>
+        <div class="col-sm-4">
+          <strong>Image</strong>
+          <div class="row">
+            <div class="col-sm-12">
+              <img src="http://placehold.it/400x400" alt="" class="img-thumbnail"/>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-4">
+              <img src="http://placehold.it/400x400" alt="" class="img-thumbnail"/>
+            </div>
+            <div class="col-sm-4">
+              <img src="http://placehold.it/400x400" alt="" class="img-thumbnail"/>
+            </div>
+            <div class="col-sm-4">
+              <img src="http://placehold.it/400x400" alt="" class="img-thumbnail"/>
+            </div>
+          </div>
         </div>
       </div>
     </div><!-- /.box-body -->

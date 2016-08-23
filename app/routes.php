@@ -12,17 +12,19 @@
 */
 
 
+
 Route::get('/', function()
 {
-	return Redirect::to('page/home');
+	return Redirect::to('/home');
 });
+
+Route::get('fbauth/{auth?}', array('as'=>'facebookAuth','uses'=>'AuthController@getFacebookLogin'));
+Route::get('logoutfb', array('as'=>'logoutfb','uses'=>'AuthController@getLoggedOut'));
+
 Route::get('admin', function()
 {
 	return Redirect::to('admin/dashboard');
 });
-
-Route::controller('login', 'LoginController');
-Route::controller('page', 'front_PageController');
 
 
 Route::group(array('before'=>'auth'),function()
@@ -30,3 +32,8 @@ Route::group(array('before'=>'auth'),function()
 	Route::controller('admin','back_PageController');
 	Route::controller('function','back_ManageController');
 });
+
+
+Route::controller('member','front_ManageController');
+Route::controller('login', 'LoginController');
+Route::controller('/', 'front_PageController');

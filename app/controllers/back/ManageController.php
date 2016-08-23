@@ -64,7 +64,6 @@
   public function postAddactivities()
   {
     $inputs = Input::all();
-
     if (Input::hasFile('photo')) {
       $photo = Input::file('photo');
       $photoNewName = date('YmdHis').'.'.$photo->getClientOriginalExtension();
@@ -90,6 +89,7 @@
   public function postAddinfomationactivities()
   {
     $inputs = Input::all();
+    $file = Input::file('coverimage');
     $actid = $inputs['actid'];
 
     if (!empty($inputs['nameEng'])) {
@@ -97,6 +97,7 @@
       $activities->act_nameEng = $inputs['nameEng'];
       $activities->act_nameThai = $inputs['nameThai'];
       $activities->act_area = $inputs['area'];
+      $activities->act_province = $inputs['province'];
       if (!empty($inputs['openday1'])) {
         $activities->act_openday1 = $inputs['openday1'];
       }else {
@@ -143,6 +144,13 @@
       $activities->act_map = $inputs['map'];
       $activities->act_about = $inputs['about'];
       $activities->category_id = $inputs['category'];
+
+      if (!empty($file)) {
+      $destinationPath = 'image/trip/cover';
+      $filename = date('YmdHis').'.'.$file->getClientOriginalExtension();
+      $upload_success = $file->move($destinationPath, $filename);
+      $activities->act_coverimage = $filename;
+      }
       $activities->save();
       $activitiesid = $activities->act_id;
       return Redirect::to("admin/activitiesinfo/$activitiesid")->with('updated', 'value');
@@ -249,6 +257,7 @@
       $price->price_totall = $inputs['price_totall'];
       $price->price_money = $inputs['price_money'];
       $price->price_define = $inputs['price_define'];
+      $price->price_pack = $inputs['price_pack'];
       $price->save();
       $activitiesid = $price->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -373,7 +382,49 @@ public function getDeletecontact($id)
     return Redirect::to("admin/activitiesinfo/$activitiesid");
 
 }
+
 /// END Contact //////////////
+public function postImage()
+{
+  $inputs = Input::all();
+  $activitiesid = $inputs['actid'];
+  // getting all of the post data
+    $files = Input::file('images');
+    // Making counting of uploaded images
+    $file_count = count($files);
+    // start count how many uploaded
+    $uploadcount = 0;
+    foreach($files as $file) {
+      $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+      $validator = Validator::make(array('file'=> $file), $rules);
+      if($validator->passes()){
+        $destinationPath = 'image/product';
+        $filename = date('YmdHis').$uploadcount.'.'.$file->getClientOriginalExtension();
+        $upload_success = $file->move($destinationPath, $filename);
+        $image = new Activitiesimage();
+        $image->act_id = $inputs['actid'];
+        $image->img_url = $filename;
+        $image->save();
+        $uploadcount ++;
+      }
+    }
+    if($uploadcount == $file_count){
+      Session::flash('success', 'Upload successfully');
+      return Redirect::to("admin/activitiesinfo/$activitiesid");
+    }
+    else {
+      return Redirect::to("admin/activitiesinfo/$activitiesid")->withInput()->withErrors($validator);
+    }
+  }
+
+  public function getDeleteact($id)
+  {
+    $activities = Activities::where('act_id','=',$id)->first();
+    File::delete("image/trip/cover/$activities->act_coverimage");
+    $activities->delete();
+    return Redirect::to("admin/activities");
+  }
+
   }
 
  ?>

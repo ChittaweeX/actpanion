@@ -1,292 +1,126 @@
 @extends('fronttemplate.default')
-@section('title')
-Home
+@section('custom-css')
+  <link href="{{ url('assets/select2/select2.min.css') }}" rel="stylesheet" />
 @endsection
-@section('description')
-
-@endsection
-@section('keywords')
-
-@endsection
-@section('customcss')
-<link rel="stylesheet" href="{{ url('assets/css/flexslider.css') }} " type="text/css" media="screen" />
-<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
-<link rel="stylesheet" type="text/css" href="{{ url('assets/js/rs-plugin/css/settings.css') }}" media="all" />
-@endsection
-@section('slider')
-  <!-- START #main-slider -->
-  <div id="main-slider">
-    <div id="content-slider">
-      <ul>
-        <!-- START Slide 1 -->
-        <li data-transition="fade" data-slotamount="5" data-masterspeed="700">
-          <img src="{{ url('image/slide-image-demo.jpg') }}" alt="Slider Image 1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
-
-          <!-- LAYER NR. 2 -->
-          <div class="caption caption-gray sfr stl slider-heading text-upper "
-            data-x="200"
-            data-y="185"
-            data-speed="1000"
-            data-start="1800"
-            data-easing="Power2.easeOut"
-            data-endspeed="600"
-            data-endeasing="Power3.easeIn"
-            data-captionhidden="off"
-            style="z-index:6;font-size:88px; color : #ffffff;"><strong>Plan you Activities</strong><br>
-          </div>
-
-          <!-- LAYER NR. 3 -->
-          <div class="caption caption-black sfb stb headline text-upper visible-lg"
-            data-x="420"
-            data-y="320"
-            data-speed="600"
-            data-start="1500"
-            data-easing="Power4.easeOut"
-            data-endspeed="500"
-            data-endeasing="Power3.easeIn"
-            data-captionhidden="off"
-            style="z-index:6;">WE CAN HELP YOU PREPARE FOR A Travel
-
-          </div>
-
-        </li>
-        <!-- END Slide 1 -->
-        </ul>
-        </div>
-        <div id="slider-overlay"></div>
-@endsection
-@section('maincontent')
-  <div class="container" id="home-page">
-
-    <!-- START .tour-plan -->
-    <form class="">
-      <div class="row">
-          <div class="col-md-10"><input type="text" class="form-control" placeholder="Where to go?" /></div>
-          <div class="submit-btn col-md-2">
-            <input type="submit" value="Search" />
+@section('content')
+  <!--   <div id="myCarousel" class="carousel slide" >
+  <div class="carousel-inner">
+          <div class="item active">
+              <img src="{{ url('image/slider3.jpg') }}" alt="" class="img-responsive"/>
+              <div class="carousel-caption">
+              </div>
           </div>
       </div>
-    </form>
-    <!-- END .tour-plan -->
 
-    <h2 class="ft-heading text-upper">Activities</h2>
-
-    <div class="carousel">
-      <ul class="slides">
-        <li>
-          <div class="row">
-            <div class="col-md-3">
-              <div class="ft-item">
-                <span class="ft-image">
-                  <img src="http://placehold.it/270x137" alt="featured Scroller" />
-                </span>
-                <div class="ft-data">
-                  <a class="ft-hotel text-upper" href="#">Hotel</a>
-                  <a class="ft-plane text-upper" href="#">Air Ticket</a>
-                  <a class="ft-tea text-upper" href="#">Break Fast</a>
-                </div>
-                <div class="ft-foot">
-                  <h4 class="ft-title text-upper"><a href="#">Vancouver, BC</a></h4>
-                  <span class="ft-offer text-upper">Starting From 250 $</span>
-                </div>
-                <div class="ft-foot-ex">
-                  <span class="ft-date text-upper alignleft">28 December 2013</span>
-                  <span class="ft-temp alignright">17&#730;c</span>
-                </div>
-              </div>
-
-              <div class="ft-item">
-                <span class="ft-image">
-                  <img src="http://placehold.it/270x137" alt="featured Scroller" />
-                </span>
-                <div class="ft-data">
-                  <a class="ft-hotel text-upper" href="#">Hotel</a>
-                  <a class="ft-plane text-upper" href="#">Air Ticket</a>
-                  <a class="ft-tea text-upper" href="#">Break Fast</a>
-                </div>
-                <div class="ft-foot">
-                  <h4 class="ft-title text-upper"><a href="#">Colossium</a></h4>
-                  <span class="ft-offer text-upper">Starting From 220 $</span>
-                </div>
-                <div class="ft-foot-ex">
-                  <span class="ft-date text-upper alignleft">28 December 2013</span>
-                  <span class="ft-temp alignright">17&#730;c</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="ft-item">
-                <span class="ft-image">
-                  <img src="http://placehold.it/270x137" alt="featured Scroller" />
-                </span>
-                <div class="ft-data">
-                  <a class="ft-hotel text-upper" href="#">Hotel</a>
-                  <a class="ft-plane text-upper" href="#">Air Ticket</a>
-                  <a class="ft-tea text-upper" href="#">Break Fast</a>
-                </div>
-                <div class="ft-foot">
-                  <h4 class="ft-title text-upper"><a href="#">Vancouver, BC</a></h4>
-                  <span class="ft-offer text-upper">Starting From 250 $</span>
-                </div>
-                <div class="ft-foot-ex">
-                  <span class="ft-date text-upper alignleft">28 December 2013</span>
-                  <span class="ft-temp alignright">17&#730;c</span>
-                </div>
-              </div>
-
-              <div class="ft-item">
-                <span class="ft-image">
-                  <img src="http://placehold.it/270x137" alt="featured Scroller" />
-                </span>
-                <div class="ft-data">
-                  <a class="ft-hotel text-upper" href="#">Hotel</a>
-                  <a class="ft-plane text-upper" href="#">Air Ticket</a>
-                  <a class="ft-tea text-upper" href="#">Break Fast</a>
-                </div>
-                <div class="ft-foot">
-                  <h4 class="ft-title text-upper"><a href="#">Colossium</a></h4>
-                  <span class="ft-offer text-upper">Starting From 220 $</span>
-                </div>
-                <div class="ft-foot-ex">
-                  <span class="ft-date text-upper alignleft">28 December 2013</span>
-                  <span class="ft-temp alignright">17&#730;c</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="ft-item">
-                <span class="ft-image">
-                  <img src="http://placehold.it/270x137" alt="featured Scroller" />
-                </span>
-                <div class="ft-data">
-                  <a class="ft-hotel text-upper" href="#">Hotel</a>
-                  <a class="ft-plane text-upper" href="#">Air Ticket</a>
-                  <a class="ft-tea text-upper" href="#">Break Fast</a>
-                </div>
-                <div class="ft-foot">
-                  <h4 class="ft-title text-upper"><a href="#">Vancouver, BC</a></h4>
-                  <span class="ft-offer text-upper">Starting From 250 $</span>
-                </div>
-                <div class="ft-foot-ex">
-                  <span class="ft-date text-upper alignleft">28 December 2013</span>
-                  <span class="ft-temp alignright">17&#730;c</span>
-                </div>
-              </div>
-
-              <div class="ft-item">
-                <span class="ft-image">
-                  <img src="http://placehold.it/270x137" alt="featured Scroller" />
-                </span>
-                <div class="ft-data">
-                  <a class="ft-hotel text-upper" href="#">Hotel</a>
-                  <a class="ft-plane text-upper" href="#">Air Ticket</a>
-                  <a class="ft-tea text-upper" href="#">Break Fast</a>
-                </div>
-                <div class="ft-foot">
-                  <h4 class="ft-title text-upper"><a href="#">Colossium</a></h4>
-                  <span class="ft-offer text-upper">Starting From 220 $</span>
-                </div>
-                <div class="ft-foot-ex">
-                  <span class="ft-date text-upper alignleft">28 December 2013</span>
-                  <span class="ft-temp alignright">17&#730;c</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="ft-item">
-                <span class="ft-image">
-                  <img src="http://placehold.it/270x137" alt="featured Scroller" />
-                </span>
-                <div class="ft-data">
-                  <a class="ft-hotel text-upper" href="#">Hotel</a>
-                  <a class="ft-plane text-upper" href="#">Air Ticket</a>
-                  <a class="ft-tea text-upper" href="#">Break Fast</a>
-                </div>
-                <div class="ft-foot">
-                  <h4 class="ft-title text-upper"><a href="#">Vancouver, BC</a></h4>
-                  <span class="ft-offer text-upper">Starting From 250 $</span>
-                </div>
-                <div class="ft-foot-ex">
-                  <span class="ft-date text-upper alignleft">28 December 2013</span>
-                  <span class="ft-temp alignright">17&#730;c</span>
-                </div>
-              </div>
-
-              <div class="ft-item">
-                <span class="ft-image">
-                  <img src="http://placehold.it/270x137" alt="featured Scroller" />
-                </span>
-                <div class="ft-data">
-                  <a class="ft-hotel text-upper" href="#">Hotel</a>
-                  <a class="ft-plane text-upper" href="#">Air Ticket</a>
-                  <a class="ft-tea text-upper" href="#">Break Fast</a>
-                </div>
-                <div class="ft-foot">
-                  <h4 class="ft-title text-upper"><a href="#">Colossium</a></h4>
-                  <span class="ft-offer text-upper">Starting From 220 $</span>
-                </div>
-                <div class="ft-foot-ex">
-                  <span class="ft-date text-upper alignleft">28 December 2013</span>
-                  <span class="ft-temp alignright">17&#730;c</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+          <span class="icon-prev"></span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">
+          <span class="icon-next"></span>
+      </a>
   </div>
+-->
 
+
+  <!-- Page Content -->
+  <div class="container">
+
+      <!-- Marketing Icons Section -->
+
+      <div class="row">
+          <div class="col-lg-12">
+              <h3 class="page-header">
+                <span style="color: #84bbfc;">ACT</span>IVITIES SEARCH <i class="fa fa-search"></i>
+              </h3>
+          </div>
+          <form  action="{{ url('activities') }}" method="post">
+            <div class="col-lg-10 col-md-offset-1">
+              <div class="form-group">
+                <select class="js-example-basic-single form-control input-lg" name="name"  onchange="this.form.submit()">
+                  @foreach($activitiesdata as $key => $actdatalist)
+                    <option value="{{ $actdatalist->act_nameEng }}">{{ $actdatalist->act_nameEng }} , {{ $actdatalist->act_province }}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          </form>
+
+      </div>
+      <!-- /.row -->
+
+      <!-- Portfolio Section -->
+      <div class="row">
+          <div class="col-lg-12">
+              <h4 class="page-header">ACTIVITIES RECOMMEND <i class="fa fa-thumbs-o-up"></i></h4>
+          </div>
+          @foreach($activitiesdata as $key => $actdata)
+            <div class="col-md-4 col-sm-6">
+                <a href="{{ url("activities/$actdata->act_nameEng") }}">
+                    <img class="img-responsive img-portfolio img-hover" src="{{ url("image/trip/cover/$actdata->act_coverimage") }}" alt="">
+                    <div class="carousel-caption">
+                      <span style="font-size: 20px;"><strong>{{ $actdata->act_nameEng }}</strong>
+                      </span>
+            </div>
+                </a>
+            </div>
+          @endforeach
+          <div class="col-lg-12 text-center">
+              <button type="button" class="btn btn-primary">
+                SEE MORE <i class="fa fa-plus"></i>
+              </button>
+          </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- Features Section -->
+      <div class="row">
+          <div class="col-lg-12">
+              <h4 class="page-header">What is <span style="color: #84bbfc;">ACT</span>PANION?</h4>
+          </div>
+          <div class="col-md-6">
+              <p>
+                ACTPANION is your smart travel guide. We use our clever algorithms to peruse the web and crunch through millions of websites and reviews. The result: unique travel recommendations designed for you. Choose your favorite hotels, sights, activities and restaurants and add them to your bucket list. From there, book your favorites seamlessly through the app. All your bookings and saved places are now in one easy to find location. Download our guides to your smartphone for access to maps, local tips, bookings and personalized suggestions all without the internet!
+              </p>
+              <p>HOW TO USE</p>
+              <ul>
+                  <li>Login</li>
+                  <li>Step 2</li>
+                  <li>Step 3</li>
+              </ul>
+          </div>
+          <div class="col-md-6">
+              <img class="img-responsive" src="{{ url('image/main2.jpg') }}" alt="">
+          </div>
+      </div>
+      <!-- /.row -->
+
+      <hr>
+
+      <!-- Call to Action Section -->
+      <div class="well">
+          <div class="row">
+              <div class="col-md-8">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+              </div>
+              <div class="col-md-4">
+                  <a class="btn btn-lg btn-default btn-block" href="#">Call Me</a>
+              </div>
+          </div>
+      </div>
 
 @endsection
-
-
-@section('customjs')
-  <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-  <script type="text/javascript" src="{{ url('assets/js/rs-plugin/js/jquery.plugins.min.js') }} "></script>
-  <script type="text/javascript" src="{{ url('assets/js/rs-plugin/js/jquery.revolution.min.js') }} "></script>
-
-
-  <script type="text/javascript">
-  $(document).ready(function() {
-    // revolution slider
-    revapi = $("#content-slider").revolution({
-      delay: 15000,
-      startwidth: 1170,
-      startheight: 920,
-      hideThumbs: 20,
-      fullWidth: "on",
-      fullScreen: "off",
-      fullScreenOffsetContainer: "",
-      navigationVOffset: 320
-    });
-
-    // initilize datepicker
-    $(".date-picker").datepicker();
-  });
-
-
-    $(window).load(function(){
-      $('.carousel').flexslider({
-    animation: "fade",
-    animationLoop: true,
-    controlNav: false,
-      maxItems: 1,
-    pausePlay: false,
-    mousewheel:true,
-    start: function(slider){
-      $('body').removeClass('loading');
-    }
-      });
-    });
-
-
-  </script>
-  <script>
-  $(document).ready(function(){
-    $("#adults").minimalect({ theme: "bubble", placeholder: "Select" });
-    $("#kids").minimalect({ theme: "bubble", placeholder: "Select" });
-  });
-  </script><!--- SELECT BOX -->
+@section('custom-js')
+<script src="{{ url('assets/select2/select2.min.js') }}"></script>
+<script type="text/javascript">
+$(".js-example-basic-single").select2({
+  placeholder: "Select Activities",
+  allowClear: true
+});
+</script>
+<!-- Script to Activate the Carousel -->
+<script>
+$('.carousel').carousel({
+    interval: 5000 //changes the speed
+})
+</script>
 @endsection
