@@ -9,7 +9,7 @@ class front_PageController extends Controller
   {
     //$data = array('activitiesdata' => Activities::all(), );
     //return View::make('front.home',$data);
-    return View::make('index');
+    return View::make('front.home');
   }
   public function getActivitiesall()
   {
