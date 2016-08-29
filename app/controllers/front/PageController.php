@@ -7,8 +7,9 @@ class front_PageController extends Controller
 
   public function getHome()
   {
-    $data = array('activitiesdata' => Activities::all(), );
-    return View::make('front.home',$data);
+    //$data = array('activitiesdata' => Activities::all(), );
+    //return View::make('front.home',$data);
+    return View::make('index');
   }
   public function getActivitiesall()
   {
