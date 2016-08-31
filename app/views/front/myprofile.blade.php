@@ -10,15 +10,7 @@
       </div>
       <div class="row">
         <div class="col-sm-2">
-          <div class="list-group">
-  <a href="{{ url('mydashboard') }}" class="list-group-item ">
-    <i class="fa fa-suitcase"></i> My Activities <span class="badge">0</span>
-  </a>
-  <a href="{{ url('myprofile')}}" class="list-group-item active"><i class="fa fa-user"></i> Profile
-  </a>
-  <a href="#" class="list-group-item"><i class="fa fa-money"></i> Payment
-  </a>
-</div>
+          @include('fronttemplate.smallmenu')
         </div>
         <div class="col-sm-10">
           <div class="panel panel-primary">
@@ -32,13 +24,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="">FirstName</label>
-                    <input type="text" class="form-control" id="" placeholder="" value="{{ $memberdata->mem_fname }}">
+                    <input type="text" class="form-control" id="" placeholder="" value="{{ $memberdata->member_fname }}">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="">LastName</label>
-                    <input type="text" class="form-control" id="" placeholder="" value="{{ $memberdata->mem_lname }}">
+                    <input type="text" class="form-control" id="" placeholder="" value="{{ $memberdata->member_lname }}">
                   </div>
                 </div>
               </div>
@@ -62,13 +54,13 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="">Email</label>
-                    <input type="text" class="form-control" id="" placeholder="" value="{{ $memberdata->mem_email }}">
+                    <input type="text" class="form-control" id="" placeholder="" value="{{ $memberdata->member_email }}">
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="">Phone</label>
-                    <input type="text" class="form-control" id="" placeholder="" value="{{ $memberdata->mem_tel }}">
+                    <input type="text" class="form-control" id="" placeholder="" value="{{ $memberdata->member_tel }}">
                   </div>
                 </div>
               </div>

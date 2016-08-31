@@ -107,14 +107,16 @@
     $inputs = Input::all();
     $id = $inputs['actid'];
     $activities = Activities::where('act_id','=',$id)->first();
-    if (Input::hasFile('photo')) {
-      $photo = Input::file('photo');
+    if (Input::hasFile('coverimage')) {
+      File::delete("image/activities/cover/$activities->act_cover_image");
+      $photo = Input::file('coverimage');
       $photoNewName = date('YmdHis').'.'.$photo->getClientOriginalExtension();
       $photo->move('image/activities/cover',$photoNewName);
       $activities->act_cover_image = $photoNewName;
     }else{
 
     }
+  
     if (!empty($inputs['nameEN'])) {
       $activities->act_type = $inputs['type'];
       $activities->act_name_th = $inputs['nameTH'];

@@ -5,20 +5,11 @@
 @section('content')
   <div class='container '>
     <div class="page-header">
-
-      <h3> <img src="{{ Session::get('actimage') }}" alt="" class="img-circle" height="40" width="40"/> {{ Session::get('actname') }} <strong>DashBoard</strong></h3>
+      <h3> <img src="{{ Session::get('actimage') }}" alt="" class="img-circle" height="40" width="40"/> {{ Session::get('actname') }} <strong>Activities</strong></h3>
     </div>
     <div class="row">
       <div class="col-sm-2">
-        <div class="list-group">
-<a href="{{ url('mydashboard') }}" class="list-group-item active">
-  <i class="fa fa-suitcase"></i> My Activities <span class="badge">0</span>
-</a>
-<a href="{{ url('myprofile')}}" class="list-group-item"><i class="fa fa-user"></i> Profile
-</a>
-<a href="#" class="list-group-item"><i class="fa fa-money"></i> Payment
-</a>
-</div>
+        @include('fronttemplate.smallmenu')
       </div>
       <div class="col-sm-10">
         <div class="panel panel-primary">

@@ -20,26 +20,26 @@
       $oauth = new Hybrid_Auth(app_path(). '/config/fb_auth.php');
       $provider = $oauth->authenticate('Facebook');
       $profile = $provider->getUserProfile();
-      $memcheck = Member::where('mem_key','=',$profile->identifier)->first();
+      $memcheck = Member::where('member_key','=',$profile->identifier)->first();
       if (count($memcheck)) {
-        $memid = $memcheck->mem_id;
+        $memid = $memcheck->member_id;
         Session::put('authpass', '1');
-        Session::put('actname',$memcheck->mem_fname.' '.$memcheck->mem_lname);
+        Session::put('actname',$memcheck->member_fname.' '.$memcheck->member_lname);
         Session::put('actimage',$profile->photoURL);
         Session::put('actmemid',$memid);
         return Redirect::to('/');
         //return var_dump($profile).'<a href="logoutfb">LOG OUT</a>';
       }else{
         $member = new Member;
-        $member->mem_key = $profile->identifier;
-        $member->mem_fname = $profile->firstName;
-        $member->mem_lname = $profile->lastName;
-        $member->mem_email = $profile->email;
+        $member->member_key = $profile->identifier;
+        $member->member_fname = $profile->firstName;
+        $member->member_lname = $profile->lastName;
+        $member->member_email = $profile->email;
         if ($profile->phone != NULL ) {
-        $member->mem_tel = $profile->phone;
+        $member->member_tel = $profile->phone;
         }
         $member->save();
-        $memid = $member->mem_id;
+        $memid = $member->member_id;
 
         Session::put('authpass', '1');
         Session::put('actname',$profile->firstName.' '.$profile->lastName);

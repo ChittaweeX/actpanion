@@ -51,7 +51,7 @@
       <!-- Portfolio Section -->
       <div class="row">
           <div class="col-lg-12">
-              <h4 class="page-header">ACTIVITIES RECOMMEND <i class="fa fa-thumbs-o-up"></i></h4>
+              <h3 class="page-header"><span style="color: #84bbfc;">ACT</span>IVITIES RECOMMEND <i class="fa fa-thumbs-o-up"></i></h3>
           </div>
           @foreach($activitiesdata as $key => $actdata)
             <div class="col-md-4 col-sm-6">
@@ -60,18 +60,102 @@
                     <div class="carousel-caption">
                       <span style="font-size: 20px;"><strong>{{ $actdata->act_name_en }}</strong>
                       </span>
-            </div>
+                    </div>
                 </a>
             </div>
           @endforeach
-          <div class="col-lg-12 text-center">
+          <div class="col-lg-12 col-md-12 text-center">
               <button type="button" class="btn btn-primary">
                 SEE MORE <i class="fa fa-plus"></i>
               </button>
           </div>
       </div>
       <!-- /.row -->
+      <div class="row">
 
+            <div class="col-lg-12">
+                <h3 class="page-header"><span style="color: #84bbfc;">New</span> Party</h3>
+            </div>
+
+            <div class="col-sm-3 col-xs-12">
+              <div class="panel panel-primary">
+                <div class="panel-body text-center">
+                  <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                  <br>
+                  <p>
+                  <strong>Name</strong> <i class="fa fa-group"></i> <span class="badge">10</span>
+                  </p>
+                  <p>
+                    <img src="{{ Session::get('actimage') }}" alt="" height="20" width="20" class="img-circle"/> Chittawee Jongrian
+                  </p>
+                  <button type="button" class="btn btn-primary">
+                    Join <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+                <br>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <div class="panel panel-primary">
+                <div class="panel-body text-center">
+                  <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                  <br>
+                  <p>
+                  <strong>Name</strong> <i class="fa fa-group"></i> <span class="badge">10</span>
+                  </p>
+                  <p>
+                    <img src="{{ Session::get('actimage') }}" alt="" height="20" width="20" class="img-circle"/> Chittawee Jongrian
+                  </p>
+                  <button type="button" class="btn btn-primary">
+                    Join <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+                <br>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <div class="panel panel-primary">
+                <div class="panel-body text-center">
+                  <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                  <br>
+                  <p>
+                  <strong>Name</strong> <i class="fa fa-group"></i> <span class="badge">10</span>
+                  </p>
+                  <p>
+                    <img src="{{ Session::get('actimage') }}" alt="" height="20" width="20" class="img-circle"/> Chittawee Jongrian
+                  </p>
+                  <button type="button" class="btn btn-primary">
+                    Join <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+                <br>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <div class="panel panel-primary">
+                <div class="panel-body text-center">
+                  <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                  <br>
+                  <p>
+                  <strong>Name</strong> <i class="fa fa-group"></i> <span class="badge">10</span>
+                  </p>
+                  <p>
+                    <img src="{{ Session::get('actimage') }}" alt="" height="20" width="20" class="img-circle"/> Chittawee Jongrian
+                  </p>
+                  <button type="button" class="btn btn-primary">
+                    Join <i class="fa fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+                <br>
+            </div>
+            <div class="col-lg-12 col-md-12 text-center">
+                <button type="button" class="btn btn-primary">
+                  Create Your Party <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
+                </button>
+            </div>
+
+        </div>
       <!-- Features Section -->
       <div class="row">
           <div class="col-lg-12">
@@ -81,12 +165,6 @@
               <p>
                 ACTPANION is your smart travel guide. We use our clever algorithms to peruse the web and crunch through millions of websites and reviews. The result: unique travel recommendations designed for you. Choose your favorite hotels, sights, activities and restaurants and add them to your bucket list. From there, book your favorites seamlessly through the app. All your bookings and saved places are now in one easy to find location. Download our guides to your smartphone for access to maps, local tips, bookings and personalized suggestions all without the internet!
               </p>
-              <p>HOW TO USE</p>
-              <ul>
-                  <li>Login</li>
-                  <li>Step 2</li>
-                  <li>Step 3</li>
-              </ul>
           </div>
           <div class="col-md-6">
               <img class="img-responsive" src="{{ url('image/main2.jpg') }}" alt="">

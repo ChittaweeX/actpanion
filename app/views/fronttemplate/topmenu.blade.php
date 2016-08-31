@@ -13,24 +13,22 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-
-                <li>
-                    <a href="{{ url("/activitiesall") }}">ACTIVIES</a>
-                </li>
-                <li>
-                    <a href="">HOW</a>
-                </li>
-                <li>
-                    <a href="">CONTACT</a>
-                </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img  src="{{ url('image/flag/United Kingdom-01.png') }}" alt="" height="25px"/><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-group"></i> <span class="badge">1</span></a>
                     <ul class="dropdown-menu">
                       <li>
-                          <a href="{{ url('') }}"><img  src="{{ url('image/flag/Thailand-01.png') }}" alt="" height="25px"/> ภาษาไทย</a>
+                          <a href="#"><img src="{{ Session::get('actimage') }}" alt="" height="20" width="20" class="img-circle"/> เฮไฮดร้า Want to join your party</a>
                       </li>
                       <li>
-                          <a href="{{ url('') }}"><img  src="{{ url('image/flag/United Kingdom-01.png') }}" alt="" height="25px"/> English</a>
+                          <a href="#"><strong>see more</strong>  <i class="fa fa-plus"></i></a>
+                      </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase"></i> <span class="badge">1</span></a>
+                    <ul class="dropdown-menu">
+                      <li>
+                          <a href="#"><strong>see more</strong>  <i class="fa fa-plus"></i></a>
                       </li>
                     </ul>
                 </li>
@@ -41,8 +39,11 @@
                           <li>
                               <a href="{{ url('myprofile') }}"><i class="fa fa-user"></i>  Profile</a>
                           </li>
+                          <li>
+                              <a href="{{ url('myparty') }}"><i class="fa fa-group"></i>  My Party</a>
+                          </li>
                             <li>
-                                <a href="{{ url('mydashboard') }}"><i class="fa fa-suitcase"></i>  My Activities <span class="badge">0</span></a>
+                                <a href="{{ url('myactivities') }}"><i class="fa fa-suitcase"></i>  My Activities <span class="badge">0</span></a>
                             </li>
                             <li>
                                 <a href="{{ url('logoutfb') }}"><i class="fa fa-sign-out"></i>  Logout</a>
@@ -55,6 +56,7 @@
                   </li>
                 @endif
             </ul>
+            
         </div>
         <!-- /.navbar-collapse -->
     </div>

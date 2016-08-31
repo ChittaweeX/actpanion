@@ -24,16 +24,18 @@ class front_PageController extends Controller
    );
     return View::make('front.booking',$data);
   }
-  public function getMydashboard()
+  public function getMyactivities()
   {
-    return View::make('front.mydashboard');
+    return View::make('front.myactivities');
+  }
+  public function getMyparty()
+  {
+    return View::make('front.myparty');
   }
   public function getMyprofile()
   {
     $memid = Session::get('actmemid');
-
-
-    $data = array('memberdata' => Member::where('mem_id','=',$memid)->first(), );
+    $data = array('memberdata' => Member::where('member_id','=',$memid)->first(), );
     return View::make('front.myprofile',$data);
   }
   public function getActivities($name)
