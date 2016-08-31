@@ -5,62 +5,38 @@
   class back_PageController extends Controller
   {
     /* Dashboard */
-    public function getDashboard()
+    public function getDashboard() // dashboard
     {
       return View::make('back.dashboard');
     }
     /* END Dashboard */
 
     /* AdminUser */
-    public function getAdminuser()
+    public function getAdminuser() // Adminpage
     {
-      $data = array('userdata' => Adminuser::all() , );
+      $data = array('typedata' => AdminType::all() ,
+      'admindata' => AdminUser::all() );
       return View::make('back.adminuser',$data);
-    }
-    public function getAdminadduser()
-    {
-      return View::make('back.adminuser_addnew');
     }
     /* END AdminUser */
 
     /* Activities */
     public function getActivities()
     {
-      $data = array('activitiesdata' => Activities::join('activitiescategory', 'activities.category_id', '=', 'activitiescategory.category_id')
-      ->get() ,
-    'categorydata' => Activitiescategory::all() );
-      return View::make('back.activities',$data);
+    $data = array('activitiesdata' => Activities::all() ,
+    'typedata' => ActivitiesType::all() );
+      return View::make('back.activities_manage',$data);
     }
-
-    public function getActivitiesinfo($actid)
+    public function getActivitiesdetail($id)
     {
-      $data = array('activitiesdata' => Activities::where('act_id','=',$actid)->first(),
-      'pricedata' => Price::where('activities_id','=',$actid)->get(),
-      'tricketadvancedata' => Activitiesticketadvance::where('activities_id','=',$actid)->get(),
-      'timesessiondata' => Activitiestimesession::where('activities_id','=',$actid)->get(),
-      'paymentdata' => Activitiespayment::where('activities_id','=',$actid)->get(),
-      'contactdata' => Activitiescontact::where('activities_id','=',$actid)->get(),
-      'imagedata' => Activitiesimage::where('act_id','=',$actid)->get(),
-      'categorydata' => Activitiescategory::all(),
-      );
-      return View::make('back.activities_infomation',$data);
+    $data = array('activitiesdata' => Activities::where('act_id','=',$id)->first() ,
+    'typedata' => ActivitiesType::all() );
+      return View::make('back.activities_detail',$data);
     }
-    public function getActivitiespreview($actid)
+    // Type
+    public function getActivitiestype()
     {
-      $data = array('activitiesdata' => Activities::where('act_id','=',$actid)->first(),
-      'pricedata' => Price::where('activities_id','=',$actid)->get(),
-      'tricketadvancedata' => Activitiesticketadvance::where('activities_id','=',$actid)->get(),
-      'timesessiondata' => Activitiestimesession::where('activities_id','=',$actid)->get(),
-      'paymentdata' => Activitiespayment::where('activities_id','=',$actid)->get(),
-      'contactdata' => Activitiescontact::where('activities_id','=',$actid)->get(),
-      'categorydata' => Activitiescategory::all(),
-      );
-      return View::make('back.activities_preview',$data);
-    }
-    // Category
-    public function getActivitiescategory()
-    {
-      $data = array('category' => Activitiescategory::all() , );
+      $data = array('typedata' => ActivitiesType::all() , );
       return View::make('back.activities_category',$data);
     }
 

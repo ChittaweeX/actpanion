@@ -30,7 +30,7 @@
               <i class="fa fa fa-picture-o"></i> <span>Activities</span>
             </a>
           </li>
-          <li><a href="{{ url('admin/activitiescategory') }}"><i class="fa fa-sitemap"></i>Category</a></li>
+          <li><a href="{{ url('admin/activitiestype') }}"><i class="fa fa-sitemap"></i>Category</a></li>
         </ul>
       </li>
       <li {{ Request::segment('2')=='adminuser'?'class="active"':'' }}>

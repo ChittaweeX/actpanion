@@ -31,8 +31,59 @@ AdminUsers
   <!-- Default box -->
   <div class="box">
     <div class="box-header with-border pull-right">
-      <a href="{{ url('admin/adminadduser') }}"><button type='submit' class='btn btn-sm  btn-primary btn-flat'>Add User </button></a>
-      <button type='submit' class='btn btn-sm btn-info btn-flat'>Group User </button>
+      <button type='button' class='btn btn-sm  btn-primary btn-flat' data-toggle="modal" data-target="#addAdmin">Add User </button>
+      <div class="modal fade" id="addAdmin" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="">ADD NEW ADMIN</h4>
+            </div>
+            <div class="modal-body">
+              <form class="" action="{{ url('function/addnewadmin') }}" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="">Type</label>
+                  <select name="type" class="form-control">
+                    @foreach($typedata as $type)
+                      <option value="{{ $type->type_id }}">
+                        {{ $type->type_name }}
+                      </option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="">Name</label>
+                  <input type="text" class="form-control" name="name" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label for="">Username</label>
+                  <input type="text" class="form-control" name="username" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label for="">Password</label>
+                  <input type="password" class="form-control" name="password" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label for="">Info</label>
+                  <textarea name="info" rows="8" cols="40" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="">Email</label>
+                  <input type="email" class="form-control" name="email" placeholder="">
+                </div>
+                <div class="form-group">
+                  <label for="">Image</label>
+                  <input type="file" class="form-control" name="image" placeholder="">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="box-body">
       <strong>Admin Table</strong>
@@ -43,6 +94,7 @@ AdminUsers
             <tr>
               <th>ID</th>
               <th>UserName</th>
+              <th>Email</th>
               <th>Created_at</th>
               <th>Login_IP</th>
               <th>Status</th>
@@ -50,12 +102,13 @@ AdminUsers
             </tr>
           </thead>
           <tbody>
-            @foreach($userdata as $data )
+            @foreach($admindata as $data )
               <tr>
-                <td>1</td>
-                <td>{{ $data->user_name }}</td>
+                <td>{{ $data->admin_id }}</td>
+                <td>{{ $data->admin_name }}</td>
+                <td>{{ $data->admin_email }}</td>
                 <td>{{ $data->created_at }}</td>
-                <td>0.0.0.0</td>
+                <td>{{ $data->admin_logip }}</td>
                 <td><span class="label label-default">Offline</span></td>
                 <td><button type="button" class="btn btn-primary btn-flat"><i class="fa fa-edit"></i></button>
                 <button type="button" class="btn btn-danger btn-flat"><i class="fa fa-trash-o"></i></button></td>

@@ -15,14 +15,14 @@ class LoginController extends Controller
      $inputs = Input::all();
 
      $checkUser = array(
-       'user_name' => $inputs['username'],
+       'username' => $inputs['username'],
        'password' => $inputs['password']
      );
      if(Auth::attempt($checkUser)){
           $id = Auth::id();
         // $user = Employee::where('emp_ID','=',$id)->first();
          //Session::put('empid', $user->emp_ID);
-       return Redirect::to('admin/dashboard')->with('loginsuccess', 'value');
+      return Redirect::to('admin/dashboard')->with('loginsuccess', 'value');
      }else{
        return Redirect::back()->with('loginerror', 'value') ;
      }

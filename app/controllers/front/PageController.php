@@ -7,8 +7,8 @@ class front_PageController extends Controller
 
   public function getHome()
   {
-    //$data = array('activitiesdata' => Activities::all(), );
-    //return View::make('front.home',$data);
+    $data = array('activitiesdata' => Activities::all(), );
+    return View::make('front.home',$data);
     return View::make('front.home');
   }
   public function getActivitiesall()
@@ -38,13 +38,13 @@ class front_PageController extends Controller
   }
   public function getActivities($name)
   {
-    $activities = Activities::where('act_nameEng','=',$name)->first();
+    $activities = Activities::where('act_name_en','=',$name)->first();
     $id = $activities->act_id ;
-    $data = array('activitiesdata' => Activities::where('act_nameEng','=',$name)
+    $data = array('activitiesdata' => Activities::where('act_name_en','=',$name)
     ->first(),
-  'actrentdata' => Activities::where('category_id','=','1')->get(),
-  'pricedata' => Price::where('activities_id','=',$id)->get(),
-  'tricketadvancedata' => Activitiesticketadvance::where('activities_id','=',$id)->get(), );
+  'actrentdata' => Activities::where('act_type','=','1')->get(),
+  //'pricedata' => Price::where('activities_id','=',$id)->get(),
+   );
     return View::make('front.activitiesitem',$data);
   }
   public function postActivities()

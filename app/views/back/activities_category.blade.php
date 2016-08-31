@@ -34,7 +34,8 @@ Activities
       <button type='submit' class='btn btn-lg  btn-primary btn-flat' data-toggle="modal" data-target="#addCat"><i class="fa fa-plus"></i> Add Category </button>
       <div class="modal fade" id="addCat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-    <form  action="{{ url('function/addcategory') }}" method="post" enctype="multipart/form-data">
+    <form  action="{{ url('function/addactivitiestype') }}" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="adminid" value="">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -43,10 +44,18 @@ Activities
       <div class="modal-body">
         <div class="col-md-12">
         <div class="form-group">
+          <label for="">Category Name (TH)</label>
+          <div class="row">
+            <div class="col-sm-12 ">
+              <input type="text" class="form-control" name="typenameTH" placeholder="" required="">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="">Category Name (ENG)</label>
           <div class="row">
             <div class="col-sm-12 ">
-              <input type="text" class="form-control" name="CatnameEng" placeholder="" required="">
+              <input type="text" class="form-control" name="typenameEN" placeholder="" required="">
             </div>
           </div>
         </div>
@@ -69,8 +78,9 @@ Activities
         <table id="example1" class="table table-bordered ">
           <thead>
             <tr >
-              <th class="text-primary">ID</th>
-              <th class="text-primary">Name</th>
+
+              <th class="text-primary">NameTH</th>
+              <th class="text-primary">NameEN</th>
               <th class="text-primary">Activities in</th>
               <th class="text-primary">Created</th>
               <th class="text-primary">Create By</th>
@@ -78,54 +88,20 @@ Activities
             </tr>
           </thead>
           <tbody>
-            @foreach($category as $cat)
+            @foreach($typedata as $type)
               <tr>
-                <td>{{ $cat->category_id }}</td>
-                <td>{{$cat->category_name}}</td>
+                <td>{{$type->act_type_name_th}}</td>
+                <td>{{$type->act_type_name_en}}</td>
                 <td>0</td>
-                <td>{{ $cat->created_at }}</td>
+                <td>{{$type->created_at	}}</td>
                 <td>Manager</td>
                 <td>
-
-                  <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="modal" data-target="#editCat-{{$cat->category_id}}"><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="modal" data-target="#editType"><i class="fa fa-edit"></i></button>
                   <a href="">
                   <button type="button" class="btn btn-sm btn-default btn-flat" data-toggle="tooltip" data-placement="top" title="View On Page"><i class="fa fa-globe"></i></button></a>
+                </td>
                 </tr>
 
-                <div class="modal fade" id="editCat-{{$cat->category_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-              <form  action="{{ url('function/updatecategory') }}" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="categoryId" value="{{$cat->category_id}}">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
-                </div>
-                <div class="modal-body">
-                  <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="">Category Name (ENG)</label>
-                    <div class="row">
-                      <div class="col-sm-12 ">
-                        <input type="text" class="form-control" name="CatnameEng" value="{{$cat->category_name}}" required="">
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save</button>
-                  <a href="{{ url("function/deletecategory/$cat->category_id")}}">
-                    <button type="button" class="btn btn-danger" >Delete</button>
-                  </a>
-
-                </div>
-              </div>
-            </form>
-            </div>
-          </div>
             @endforeach
 
 

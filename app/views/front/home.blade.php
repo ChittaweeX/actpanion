@@ -38,7 +38,7 @@
               <div class="form-group">
                 <select class="js-example-basic-single form-control input-lg" name="name"  onchange="this.form.submit()">
                   @foreach($activitiesdata as $key => $actdatalist)
-                    <option value="{{ $actdatalist->act_nameEng }}">{{ $actdatalist->act_nameEng }} , {{ $actdatalist->act_province }}</option>
+                    <option value="{{ $actdatalist->act_name_en }}">{{ $actdatalist->act_name_th }} ,{{ $actdatalist->act_name_en }} , {{ $actdatalist->act_province }}</option>
                   @endforeach
                 </select>
               </div>
@@ -55,10 +55,10 @@
           </div>
           @foreach($activitiesdata as $key => $actdata)
             <div class="col-md-4 col-sm-6">
-                <a href="{{ url("activities/$actdata->act_nameEng") }}">
-                    <img class="img-responsive img-portfolio img-hover" src="{{ url("image/trip/cover/$actdata->act_coverimage") }}" alt="">
+                <a href="{{ url("activities/$actdata->act_name_en") }}">
+                    <img class="img-responsive img-portfolio img-hover" src="{{ url("image/activities/cover/$actdata->act_cover_image") }}" alt="">
                     <div class="carousel-caption">
-                      <span style="font-size: 20px;"><strong>{{ $actdata->act_nameEng }}</strong>
+                      <span style="font-size: 20px;"><strong>{{ $actdata->act_name_en }}</strong>
                       </span>
             </div>
                 </a>

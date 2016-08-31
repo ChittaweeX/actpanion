@@ -34,6 +34,7 @@ Route::group(array('before'=>'auth'),function()
 });
 
 
+
 Route::controller('member','front_ManageController');
 Route::controller('login', 'LoginController');
 Route::controller('/', 'front_PageController');

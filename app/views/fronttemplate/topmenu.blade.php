@@ -77,12 +77,6 @@ LOGIN TO <span style="color: #84bbfc;">ACT</span>PANION</h3>
 </div>
 </div>
 </div>
-<div class="main">
-
-<input type="text" class="form-control" placeholder="Email" autofocus>
-<input type="password" class="form-control" placeholder="Password">
-<span class="clearfix"></span>
-</div>
 <div class="login-footer">
 <div class="row">
                 <div class="col-xs-6 col-md-6">
