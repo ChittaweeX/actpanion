@@ -7,7 +7,7 @@
 
   public function postAddnewadmin()    //// create New Admin
   {
-    $inputs = Input::all();
+    $input = Input::all();
     if (Input::hasFile('image')) {
       $photo = Input::file('image');
       $photoNewName = date('YmdHis').'.'.$photo->getClientOriginalExtension();
@@ -16,12 +16,12 @@
       $photoNewName = "adminuser.png";
     }
     $admin = new AdminUser();
-    $admin->admin_type = $inputs['type'];
-    $admin->admin_name = $inputs['name'];
-    $admin->username = $inputs['username'];
-    $admin->password = Hash::make($inputs['password']);
-    $admin->admin_info = $inputs['info'];
-    $admin->admin_email = $inputs['email'];
+    $admin->admin_type = $input['type'];
+    $admin->admin_name = $input['name'];
+    $admin->username = $input['username'];
+    $admin->password = Hash::make($input['password']);
+    $admin->admin_info = $input['info'];
+    $admin->admin_email = $input['email'];
     $admin->admin_logip = Request::getClientIp();
     $admin->admin_image = $photoNewName;
     $admin->save();
@@ -32,12 +32,12 @@
 
   public function postAddactivitiestype()
   {
-    $inputs = Input::all();
-    if (!empty($inputs['typenameEN'])) {
+    $input = Input::all();
+    if (!empty($input['typenameEN'])) {
       $type = new ActivitiesType();
-      $type->act_type_name_th = $inputs['typenameTH'];
-      $type->act_type_name_en = $inputs['typenameEN'];
-      $type->act_type_createby = $inputs['adminid'];
+      $type->act_type_name_th = $input['typenameTH'];
+      $type->act_type_name_en = $input['typenameEN'];
+      $type->act_type_createby = $input['adminid'];
       $type->save();
       return Redirect::to('admin/activitiestype')->with('added', 'value');
     }else {
@@ -48,11 +48,11 @@
 
   public function postUpdatecategory()
   {
-    $inputs = Input::all();
-    $id = $inputs['categoryId'];
-    if (!empty($inputs['CatnameEng'])) {
+    $input = Input::all();
+    $id = $input['categoryId'];
+    if (!empty($input['CatnameEng'])) {
       $category = Activitiescategory::where('category_id','=',$id)->first();
-      $category->category_name = $inputs['CatnameEng'];
+      $category->category_name = $input['CatnameEng'];
       $category->save();
       return Redirect::to('admin/activitiescategory')->with('updated', 'value');
     }else {
@@ -71,7 +71,7 @@
 
   public function postAddactivities()
   {
-    $inputs = Input::all();
+    $input = Input::all();
     if (Input::hasFile('photo')) {
       $photo = Input::file('photo');
       $photoNewName = date('YmdHis').'.'.$photo->getClientOriginalExtension();
@@ -79,19 +79,19 @@
     }else{
       $photoNewName = "empty";
     }
-    if (!empty($inputs['nameEN'])) {
+    if (!empty($input['nameEN'])) {
       $activities = new Activities();
-      $activities->act_type = $inputs['type'];
-      $activities->act_name_th = $inputs['nameTH'];
-      $activities->act_name_en = $inputs['nameEN'];
-      $activities->act_info_th = $inputs['infoEN'];
-      $activities->act_info_en = $inputs['infoTH'];
-      $activities->act_location = $inputs['googlemap'];
-      $activities->act_address_th = $inputs['addressTH'];
-      $activities->act_address_en = $inputs['addressEN'];
-      $activities->act_subdistrict = $inputs['subdistrict'];
-      $activities->act_district = $inputs['district'];
-      $activities->act_province = $inputs['province'];
+      $activities->act_type = $input['type'];
+      $activities->act_name_th = $input['nameTH'];
+      $activities->act_name_en = $input['nameEN'];
+      $activities->act_info_th = $input['infoEN'];
+      $activities->act_info_en = $input['infoTH'];
+      $activities->act_location = $input['googlemap'];
+      $activities->act_address_th = $input['addressTH'];
+      $activities->act_address_en = $input['addressEN'];
+      $activities->act_subdistrict = $input['subdistrict'];
+      $activities->act_district = $input['district'];
+      $activities->act_province = $input['province'];
       $activities->act_cover_image = $photoNewName;
       $activities->save();
 
@@ -104,8 +104,8 @@
   public function postEditactivities()
   {
 
-    $inputs = Input::all();
-    $id = $inputs['actid'];
+    $input = Input::all();
+    $id = $input['actid'];
     $activities = Activities::where('act_id','=',$id)->first();
     if (Input::hasFile('coverimage')) {
       File::delete("image/activities/cover/$activities->act_cover_image");
@@ -116,19 +116,19 @@
     }else{
 
     }
-  
-    if (!empty($inputs['nameEN'])) {
-      $activities->act_type = $inputs['type'];
-      $activities->act_name_th = $inputs['nameTH'];
-      $activities->act_name_en = $inputs['nameEN'];
-      $activities->act_info_th = $inputs['infoTH'];
-      $activities->act_info_en = $inputs['infoEN'];
-      $activities->act_location = $inputs['googlemap'];
-      $activities->act_address_th = $inputs['addressTH'];
-      $activities->act_address_en = $inputs['addressEN'];
-      $activities->act_subdistrict = $inputs['subdistrict'];
-      $activities->act_district = $inputs['district'];
-      $activities->act_province = $inputs['province'];
+
+    if (!empty($input['nameEN'])) {
+      $activities->act_type = $input['type'];
+      $activities->act_name_th = $input['nameTH'];
+      $activities->act_name_en = $input['nameEN'];
+      $activities->act_info_th = $input['infoTH'];
+      $activities->act_info_en = $input['infoEN'];
+      $activities->act_location = $input['googlemap'];
+      $activities->act_address_th = $input['addressTH'];
+      $activities->act_address_en = $input['addressEN'];
+      $activities->act_subdistrict = $input['subdistrict'];
+      $activities->act_district = $input['district'];
+      $activities->act_province = $input['province'];
       $activities->save();
       return Redirect::to("admin/activitiesdetail/$id")->with('added', 'value');
     }else {
@@ -139,13 +139,13 @@
 /////     Time Session /////////////////
   public function postAddtimesession()
   {
-    $inputs = Input::all();
-    $actid = $inputs['activitiesid'];
-    if (!empty($inputs['timesesion_open'])) {
+    $input = Input::all();
+    $actid = $input['activitiesid'];
+    if (!empty($input['timesesion_open'])) {
       $activitiestime = new Activitiestimesession();
       $activitiestime->activities_id = $actid;
-      $activitiestime->timesesion_open = $inputs['timesesion_open'];
-      $activitiestime->timesesion_close = $inputs['timesesion_close'];
+      $activitiestime->timesesion_open = $input['timesesion_open'];
+      $activitiestime->timesesion_close = $input['timesesion_close'];
       $activitiestime->save();
       $activitiesid = $activitiestime->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -154,12 +154,12 @@
 
   public function postUpdatetimesession()
   {
-    $inputs = Input::all();
-    $id = $inputs['id'];
-    if (!empty($inputs['timesesion_open'])) {
+    $input = Input::all();
+    $id = $input['id'];
+    if (!empty($input['timesesion_open'])) {
       $timesession = Activitiestimesession::where('timesesion_id','=',$id)->first();
-      $timesession->timesesion_open = $inputs['timesesion_open'];
-      $timesession->timesesion_close = $inputs['timesesion_close'];
+      $timesession->timesesion_open = $input['timesesion_open'];
+      $timesession->timesesion_close = $input['timesesion_close'];
       $timesession->save();
       $activitiesid = $timesession->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -181,15 +181,15 @@
 /////   Ticketadvance  //////////////////
   public function postAddticketadvance()
   {
-    $inputs = Input::all();
-    $actid = $inputs['activitiesid'];
-    if (!empty($inputs['Ticketadvanceday'])) {
+    $input = Input::all();
+    $actid = $input['activitiesid'];
+    if (!empty($input['Ticketadvanceday'])) {
       $activitiesticket = new Activitiesticketadvance();
       $activitiesticket->activities_id = $actid;
-      $activitiesticket->ticket_day = $inputs['Ticketadvanceday'];
-      $activitiesticket->ticket_type1 = $inputs['Ticketadvancetype1'];
-      $activitiesticket->ticket_type2 = $inputs['Ticketadvancetype2'];
-      $activitiesticket->ticket_time = $inputs['Ticketadvancetime'];
+      $activitiesticket->ticket_day = $input['Ticketadvanceday'];
+      $activitiesticket->ticket_type1 = $input['Ticketadvancetype1'];
+      $activitiesticket->ticket_type2 = $input['Ticketadvancetype2'];
+      $activitiesticket->ticket_time = $input['Ticketadvancetime'];
       $activitiesticket->save();
       $activitiesid = $activitiesticket->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -198,14 +198,14 @@
 
   public function postUpdateticketadvance()
   {
-    $inputs = Input::all();
-    $id = $inputs['id'];
-    if (!empty($inputs['Ticketadvanceday'])) {
+    $input = Input::all();
+    $id = $input['id'];
+    if (!empty($input['Ticketadvanceday'])) {
       $activitiesticket = Activitiesticketadvance::where('ticket_id','=',$id)->first();
-      $activitiesticket->ticket_day = $inputs['Ticketadvanceday'];
-      $activitiesticket->ticket_type1 = $inputs['Ticketadvancetype1'];
-      $activitiesticket->ticket_type2 = $inputs['Ticketadvancetype2'];
-      $activitiesticket->ticket_time = $inputs['Ticketadvancetime'];
+      $activitiesticket->ticket_day = $input['Ticketadvanceday'];
+      $activitiesticket->ticket_type1 = $input['Ticketadvancetype1'];
+      $activitiesticket->ticket_type2 = $input['Ticketadvancetype2'];
+      $activitiesticket->ticket_time = $input['Ticketadvancetime'];
       $activitiesticket->save();
       $activitiesid = $activitiesticket->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -225,17 +225,17 @@
 /// Price /////////////
   public function postAddprice()
   {
-    $inputs = Input::all();
-    $actid = $inputs['activitiesid'];
-    if (!empty($inputs['price_person'])) {
+    $input = Input::all();
+    $actid = $input['activitiesid'];
+    if (!empty($input['price_person'])) {
       $price = new Price();
       $price->activities_id = $actid;
-      $price->price_person = $inputs['price_person'];
-      $price->price_type = $inputs['price_type'];
-      $price->price_totall = $inputs['price_totall'];
-      $price->price_money = $inputs['price_money'];
-      $price->price_define = $inputs['price_define'];
-      $price->price_pack = $inputs['price_pack'];
+      $price->price_person = $input['price_person'];
+      $price->price_type = $input['price_type'];
+      $price->price_totall = $input['price_totall'];
+      $price->price_money = $input['price_money'];
+      $price->price_define = $input['price_define'];
+      $price->price_pack = $input['price_pack'];
       $price->save();
       $activitiesid = $price->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -244,15 +244,15 @@
 
   public function postUpdateprice()
   {
-    $inputs = Input::all();
-    $id = $inputs['id'];
-    if (!empty($inputs['price_person'])) {
+    $input = Input::all();
+    $id = $input['id'];
+    if (!empty($input['price_person'])) {
       $price = Price::where('price_id','=',$id)->first();
-      $price->price_person = $inputs['price_person'];
-      $price->price_type = $inputs['price_type'];
-      $price->price_totall = $inputs['price_totall'];
-      $price->price_money = $inputs['price_money'];
-      $price->price_define = $inputs['price_define'];
+      $price->price_person = $input['price_person'];
+      $price->price_type = $input['price_type'];
+      $price->price_totall = $input['price_totall'];
+      $price->price_money = $input['price_money'];
+      $price->price_define = $input['price_define'];
       $price->save();
       $activitiesid = $price->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -272,16 +272,16 @@
 /// Payment ///////////////
   public function postAddpayment()
   {
-    $inputs = Input::all();
-    $actid = $inputs['activitiesid'];
-    if (!empty($inputs['bank_name'])) {
+    $input = Input::all();
+    $actid = $input['activitiesid'];
+    if (!empty($input['bank_name'])) {
       $payment = new Activitiespayment();
       $payment->activities_id = $actid;
-      $payment->bank_name = $inputs['bank_name'];
-      $payment->bank_branch = $inputs['bank_branch'];
-      $payment->account_number = $inputs['account_number'];
-      $payment->account_name = $inputs['account_name'];
-      $payment->account_type = $inputs['account_type'];
+      $payment->bank_name = $input['bank_name'];
+      $payment->bank_branch = $input['bank_branch'];
+      $payment->account_number = $input['account_number'];
+      $payment->account_name = $input['account_name'];
+      $payment->account_type = $input['account_type'];
       $payment->save();
       $activitiesid = $payment->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -290,15 +290,15 @@
 
   public function postUpdatepayment()
   {
-    $inputs = Input::all();
-    $id = $inputs['id'];
-    if (!empty($inputs['bank_name'])) {
+    $input = Input::all();
+    $id = $input['id'];
+    if (!empty($input['bank_name'])) {
       $payment1 = Activitiespayment::where('payment_id','=',$id)->first();
-      $payment1->bank_name = $inputs['bank_name'];
-      $payment1->bank_branch = $inputs['bank_branch'];
-      $payment1->account_number = $inputs['account_number'];
-      $payment1->account_name = $inputs['account_name'];
-      $payment1->account_type = $inputs['account_type'];
+      $payment1->bank_name = $input['bank_name'];
+      $payment1->bank_branch = $input['bank_branch'];
+      $payment1->account_number = $input['account_number'];
+      $payment1->account_name = $input['account_name'];
+      $payment1->account_type = $input['account_type'];
       $payment1->save();
       $activitiesid = $payment1->activities_id ;
       return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -318,17 +318,17 @@
 /// Contact //////////////
 public function postAddcontact()
 {
-  $inputs = Input::all();
-  $actid = $inputs['activitiesid'];
-  if (!empty($inputs['contact_name'])) {
+  $input = Input::all();
+  $actid = $input['activitiesid'];
+  if (!empty($input['contact_name'])) {
     $contact = new Activitiescontact();
     $contact->activities_id = $actid;
-    $contact->contact_name = $inputs['contact_name'];
-    $contact->contact_nickname = $inputs['contact_nickname'];
-    $contact->contact_position = $inputs['contact_position'];
-    $contact->contact_phone = $inputs['contact_phone'];
-    $contact->contact_email = $inputs['contact_email'];
-    $contact->contact_orther = $inputs['contact_orther'];
+    $contact->contact_name = $input['contact_name'];
+    $contact->contact_nickname = $input['contact_nickname'];
+    $contact->contact_position = $input['contact_position'];
+    $contact->contact_phone = $input['contact_phone'];
+    $contact->contact_email = $input['contact_email'];
+    $contact->contact_orther = $input['contact_orther'];
     $contact->save();
     $activitiesid = $contact->activities_id ;
     return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -336,16 +336,16 @@ public function postAddcontact()
 }
 public function postUpdatecontact()
 {
-  $inputs = Input::all();
-  $id = $inputs['id'];
-  if (!empty($inputs['contact_name'])) {
+  $input = Input::all();
+  $id = $input['id'];
+  if (!empty($input['contact_name'])) {
     $contact = Activitiescontact::where('contact_id','=',$id)->first();
-    $contact->contact_name = $inputs['contact_name'];
-    $contact->contact_nickname = $inputs['contact_nickname'];
-    $contact->contact_position = $inputs['contact_position'];
-    $contact->contact_phone = $inputs['contact_phone'];
-    $contact->contact_email = $inputs['contact_email'];
-    $contact->contact_orther = $inputs['contact_orther'];
+    $contact->contact_name = $input['contact_name'];
+    $contact->contact_nickname = $input['contact_nickname'];
+    $contact->contact_position = $input['contact_position'];
+    $contact->contact_phone = $input['contact_phone'];
+    $contact->contact_email = $input['contact_email'];
+    $contact->contact_orther = $input['contact_orther'];
     $contact->save();
     $activitiesid = $contact->activities_id ;
     return Redirect::to("admin/activitiesinfo/$activitiesid");
@@ -364,8 +364,8 @@ public function getDeletecontact($id)
 /// END Contact //////////////
 public function postImage()
 {
-  $inputs = Input::all();
-  $activitiesid = $inputs['actid'];
+  $input = Input::all();
+  $activitiesid = $input['actid'];
   // getting all of the post data
     $files = Input::file('images');
     // Making counting of uploaded images
@@ -380,7 +380,7 @@ public function postImage()
         $filename = date('YmdHis').$uploadcount.'.'.$file->getClientOriginalExtension();
         $upload_success = $file->move($destinationPath, $filename);
         $image = new Activitiesimage();
-        $image->act_id = $inputs['actid'];
+        $image->act_id = $input['actid'];
         $image->img_url = $filename;
         $image->save();
         $uploadcount ++;
