@@ -15,7 +15,8 @@
       return Redirect::to('page/home');
     }
 
-    public function postInsertParty(){
+    public function postInsertParty()
+    {
       $input = Input::all();
       $party = new Party();
       $party->party_name = $input['party_name'];
