@@ -1,6 +1,7 @@
 @extends('fronttemplate.default')
 @section('custom-css')
   <link href="{{ url('assets/select2/select2.min.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="{{ url('assets/datedropper-master/datedropper.css') }}">
 @endsection
 @section('content')
   <!--   <div id="myCarousel" class="carousel slide" >
@@ -150,11 +151,68 @@
                 <br>
             </div>
             <div class="col-lg-12 col-md-12 text-center">
-                <button type="button" class="btn btn-primary">
+              @if(Session::has('authpass'))
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createdparty">
                   Create Your Party <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
                 </button>
-            </div>
+              @else
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                  Create Your Party <i class="fa fa-plus"></i> <i class="fa fa-group"></i>
+                </button>
+              @endif
 
+
+
+                <div class="modal fade" id="createdparty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form class="" action="{{ url('functionfront/partyinsert') }}" method="post">
+        <input type="hidden" name="leader_member_id" value="{{ Session::get('actmemid') }}">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">My Party <i class="fa fa-group"></i></h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="">Name</label>
+          <input type="text" class="form-control" name="party_name" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="">Start Date</label>
+          <input type="text" class="form-control" id="startdate" name="party_sdate" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="">End Date</label>
+          <input type="text" class="form-control" id="enddate" name="party_edate" placeholder="">
+        </div>
+        <hr>
+        <div class="form-group">
+          <label for="">Public</label>
+          <select class="form-control" name="party_privately">
+            <option value="1" selected>
+              ON
+            </option>
+            <option value="2">
+              OFF
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="">Secert Code</label>
+          <input type="text" class="form-control" name="party_code" placeholder="">
+          <p class="help-block">Help text here.</p>
+        </div>
+      </div>
+      <div class="modal-footer ">
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+            </div>
         </div>
       <!-- Features Section -->
       <div class="row">
@@ -201,4 +259,8 @@ $('.carousel').carousel({
     interval: 5000 //changes the speed
 })
 </script>
+<script src="{{ url('assets/datedropper-master/datedropper.js') }}"></script>
+<script>
+$( "#startdate" ).dateDropper();
+$( "#enddate" ).dateDropper();</script>
 @endsection

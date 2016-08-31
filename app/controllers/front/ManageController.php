@@ -15,7 +15,7 @@
       return Redirect::to('page/home');
     }
 
-    public function postInsertParty()
+    public function postPartyinsert()
     {
       $input = Input::all();
       $party = new Party();
@@ -25,6 +25,8 @@
       $party->leader_member_id = $input['leader_member_id'];
       $party->party_sdate = $input['party_sdate'];
       $party->party_edate = $input['party_edate'];
+      $party->save();
+      
     }
   }
 
